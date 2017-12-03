@@ -1,32 +1,64 @@
 
-  <h1>Product-list works!</h1>
-  
   <div class="row">
-      <div class="col-xs-12">
-        <button class="btn btn-success">New Product</button>
-      </div>
+    <div class="col-xs-12">
+      <button class="btn btn-primary">New Product</button>
+      <button class="btn btn-success" (click)="onSaveData()">Save data</button>
     </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <a 
+      href="#" 
+      class="list-group-item clearfix" 
+      *ngFor="let product of products">
+        <div class="pull-left">
+          <h4 class="list-group-item-heading">{{ product.name }}</h4>
+          <p class="list-group-item-text">{{ product.snippet }}</p>
+        </div>
+        <div class="pull-right">
+          <img 
+          [src]="product.imageUrl"
+          alt="product-name" 
+          class="img-responsive" style="max-height: 100px;">
+        </div>
+      </a>
+      <app-product></app-product>
+    </div>
+  </div>
+    
     <hr>
-    <div class="row">
-      <div class="col-xs-12">
-        <a 
-        href="#" 
-        class="list-group-item clearfix" 
-        *ngFor="let product of products">
-          <div class="pull-left">
-            <h4 class="list-group-item-heading">{{ product.name }}</h4>
-            <p class="list-group-item-text">{{ product.snippet }}</p>
+
+    <p-dataGrid [value]="products" [paginator]="true" [rows]="2">
+      <p-header>
+          List of Products
+      </p-header>
+      <ng-template let-product pTemplate="item">
+          <div style="padding:3px" class="ui-g-12 ui-md-3">
+             <!-- <p-panel [header]="product.name" [style]="{'text-align':'center'}">-->
+                  <img src="assets/img/phones/car/{{car.brand}}.png" width="60">
+                  <div class="product-detail">{{product.name}}</div>
+                  <hr class="ui-widget-content" style="border-top:0">
+                  <i class="fa fa-search" (click)="selectProduct(product)" style="cursor:pointer"></i>
+              <!--</p-panel>-->
           </div>
-          <div class="pull-right">
-           <img 
-           [src]="product.imagePath"
-           alt="product-name" 
-           class="img-responsive" style="max-height: 100px;">
-          </div>
-        </a>
-        <app-product></app-product>
-      </div>
-    </div>
-    
-    
+      </ng-template>
+  </p-dataGrid>
   
+  <!-- <p-dialog header="Product Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" width="225" (onAfterHide)="onDialogHide()">
+      <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="selectedProduct" style="font-size:16px;text-align:center;padding:20px">
+          <div class="ui-grid-row">
+              <div class="ui-grid-col-12" style="text-align:center"><img src="assets/showcase/images/demo/car/{{selectedCar.brand}}.png" alt="prod-img"></div>
+          </div>
+          <div class="ui-grid-row">
+              <div class="ui-grid-col-4">Name: </div>
+              <div class="ui-grid-col-8">{{}}</div>
+          </div>
+          <div class="ui-grid-row">
+              <div class="ui-grid-col-4">Description: </div>
+              <div class="ui-grid-col-8">{{}}</div>
+          </div>
+      </div>
+  </p-dialog> -->

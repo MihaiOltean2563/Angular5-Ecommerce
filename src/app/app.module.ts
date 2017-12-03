@@ -13,8 +13,15 @@ import { ProductComponent } from './products/product-list/product/product.compon
 import { UserBasketComponent } from './user-basket/user-basket.component';
 import { UserBasketEditComponent } from './user-basket/user-basket-edit/user-basket-edit.component';
 
+//Services 
+import { ProductsService } from './products/products.service';
+import { DataStorageService } from './shared/data-storage.service';
 //PrimeFaces
-import { ButtonModule } from 'primeng/primeng';
+
+import { ButtonModule, SharedModule } from 'primeng/primeng';
+import {DataGridModule} from 'primeng/primeng';
+
+
 
 @NgModule({
   declarations: [
@@ -32,9 +39,12 @@ import { ButtonModule } from 'primeng/primeng';
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    ButtonModule
+    SharedModule,
+    ButtonModule,
+    DataGridModule
+    
   ],
-  providers: [],
+  providers: [ProductsService, DataStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

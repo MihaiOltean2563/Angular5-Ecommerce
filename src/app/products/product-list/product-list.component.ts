@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
+import { DataStorageService } from 'app/shared/data-storage.service';
+import { Response } from '@angular/http';
 import { Product } from 'app/products/product.model';
+
 
 @Component({
   selector: 'app-product-list',
@@ -8,17 +12,18 @@ import { Product } from 'app/products/product.model';
 })
 export class ProductListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataStorageService: DataStorageService) { }
 
-   products: Product[] = [
-    new Product('Motorola XOOM\u2122 with Wi-Fi','motorola',
-    './assets/img/phones/motorola-xoom-with-wi-fi.0.jpg'),
-    new Product('Motorola XOOM\u2122 with Wi-Fi','motorola',
-    './assets/img/phones/motorola-xoom-with-wi-fi.0.jpg')
-  ];
+  ngOnInit() {}
+  private products: Product[];
 
-
-  ngOnInit() {
+  onSaveData(){
+    console.log("Save triggered from product-list component!");
+    this.dataStorageService.storeProducts()
+      .subscribe(
+        (response: Response) =>{
+          console.log(response);
+        }
+      );
   }
-
 }

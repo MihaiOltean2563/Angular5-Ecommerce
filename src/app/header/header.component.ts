@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { DataStorageService } from 'app/shared/data-storage.service';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataStorageService: DataStorageService) { }
   // @Output will make this event emitter usable from outside this component,e.g to listen to this event from the parent component
   @Output() featureSelected = new EventEmitter<string>();
 
@@ -17,6 +18,10 @@ export class HeaderComponent implements OnInit {
   onSelect(feature: string) {
     console.log('clicked!');
     this.featureSelected.emit(feature);
-}
+  }
+
+  onSaveData(){
+    
+  }
 
 }
