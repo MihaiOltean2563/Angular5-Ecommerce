@@ -1,3 +1,7 @@
-<h1>
-  {{title}}
-</h1>
+<app-header (featureSelected)="onNavigate($event)"></app-header>
+
+<div class="container">
+    <h1>App Component</h1>
+    <app-products *ngIf="loadedFeature === 'home'"></app-products>
+    <app-user-basket *ngIf="loadedFeature !== 'home'"></app-user-basket>
+</div>
