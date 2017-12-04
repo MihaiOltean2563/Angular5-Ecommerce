@@ -17,9 +17,11 @@ import { UserBasketEditComponent } from './user-basket/user-basket-edit/user-bas
 //Services 
 import { ProductsService } from './products/products.service';
 import { DataStorageService } from './shared/data-storage.service';
+import { UserBasketService } from 'app/user-basket/user-basket.service';
 
 //PrimeFaces
 import { ButtonModule, SharedModule, DataGridModule, PanelModule, DialogModule } from 'primeng/primeng';
+
 
 
 @NgModule({
@@ -45,7 +47,7 @@ import { ButtonModule, SharedModule, DataGridModule, PanelModule, DialogModule }
     PanelModule,
     DialogModule
   ],
-  providers: [ProductsService, DataStorageService],
+  providers: [ProductsService, DataStorageService, UserBasketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

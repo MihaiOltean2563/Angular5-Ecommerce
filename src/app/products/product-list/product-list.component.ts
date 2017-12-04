@@ -4,6 +4,7 @@ import { DataStorageService } from 'app/shared/data-storage.service';
 import { Response } from '@angular/http';
 import { Product } from 'app/products/product.model';
 import { ProductsService } from 'app/products/products.service';
+import { UserBasketService } from 'app/user-basket/user-basket.service';
 
 
 @Component({
@@ -15,12 +16,20 @@ import { ProductsService } from 'app/products/products.service';
 export class ProductListComponent implements OnInit {
 
   constructor(private dataStorageService: DataStorageService,
-              private productService: ProductsService) { }
+              private productService: ProductsService,
+              private userBasketService: UserBasketService) { }
 
   private products: Product[];
 
   ngOnInit() {
     this.products = this.productService.getProducts();
+    this.userBasketService.cartChanged
+      .subscribe(
+        (cart: Product[]) => {
+          this.products = cart;
+          console.log("cart in prod-list: ", this.products);
+        }
+      )
   }
 
  

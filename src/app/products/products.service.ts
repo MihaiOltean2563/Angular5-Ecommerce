@@ -2,11 +2,13 @@ import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import { Product } from 'app/products/product.model';
 import { Subject } from 'rxjs/Subject';
+import { UserBasketService } from 'app/user-basket/user-basket.service';
 
 
 @Injectable()
 export class ProductsService {
-    constructor(private http: Http){}
+    constructor(private http: Http,
+                private userBasketService: UserBasketService){}
 
     productsChanged = new Subject<Product[]>();
     selectedProduct = new EventEmitter<Product>();
@@ -24,5 +26,10 @@ export class ProductsService {
     setProducts(products: Product[]){
         this.products = products;
         this.productsChanged.next(this.products.slice());
+    }
+
+    addProductToCart(product: Product){
+        console.log("Product in prod.service", product);
+        this.userBasketService.addProductToCart(product);
     }
 }

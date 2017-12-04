@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'app/products/product.model';
+import { UserBasketService } from 'app/user-basket/user-basket.service';
 
 @Component({
   selector: 'app-user-basket',
@@ -8,14 +9,22 @@ import { Product } from 'app/products/product.model';
 })
 export class UserBasketComponent implements OnInit {
 
-  constructor() { }
-
-  products: Product[] = [
+  constructor(private userBasketService: UserBasketService) { }
+  
+  private products: Product[] = [
     new Product('Motorola XOOM\u2122 with Wi-Fi','motorola',
     './assets/img/phones/motorola-xoom-with-wi-fi.0.jpg')
   ];
 
   ngOnInit() {
+    this.userBasketService.cartChanged
+    .subscribe(
+      (products: Product[]) => {
+        console.log("cart: ", this.products);
+        this.products = products;
+        console.log(this.products);
+      }
+    )
   }
-
+  
 }

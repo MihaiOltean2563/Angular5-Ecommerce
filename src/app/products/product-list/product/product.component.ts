@@ -18,9 +18,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     this.products = this.productService.getProducts();
-    console.log("prods", this.products);
   }
-
 
   selectProduct(product: Product){
     this.selectedProduct = product;
@@ -31,7 +29,6 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart(product: Product){
-    console.log('Added' + product + 'to Cart!');
-    this.productService.selectedProduct.emit(product);
+    this.productService.addProductToCart(product);
   }
 }
