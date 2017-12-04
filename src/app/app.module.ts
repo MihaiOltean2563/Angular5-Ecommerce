@@ -3,6 +3,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -16,11 +17,9 @@ import { UserBasketEditComponent } from './user-basket/user-basket-edit/user-bas
 //Services 
 import { ProductsService } from './products/products.service';
 import { DataStorageService } from './shared/data-storage.service';
+
 //PrimeFaces
-
-import { ButtonModule, SharedModule } from 'primeng/primeng';
-import {DataGridModule} from 'primeng/primeng';
-
+import { ButtonModule, SharedModule, DataGridModule, PanelModule, DialogModule } from 'primeng/primeng';
 
 
 @NgModule({
@@ -39,10 +38,12 @@ import {DataGridModule} from 'primeng/primeng';
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    CommonModule,
     SharedModule,
     ButtonModule,
-    DataGridModule
-    
+    DataGridModule,
+    PanelModule,
+    DialogModule
   ],
   providers: [ProductsService, DataStorageService],
   bootstrap: [AppComponent]

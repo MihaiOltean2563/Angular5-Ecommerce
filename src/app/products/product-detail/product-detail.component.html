@@ -1,23 +1,23 @@
 <div class="row">
   <div class="col-xs-12">
-    <img src="" alt="" class="img-responsive">
+    <img [src]="product.imageUrl" alt="{{ product.name }}" class="img-responsive" style="max-height:200px;">
   </div>
 </div>
 
 <div class="row">
   <div class="col-xs-12">
-    <h1>Product Name</h1>
+    <h1>{{ product.name }}</h1>
   </div>
 </div>
 
 <div class="row">
-    <div class="col-xs-12">
-      <h1> $ Product Price</h1>
-    </div>
+  <div class="col-xs-12">
+    <h1> {{ product.snippet }}</h1>
   </div>
+</div>
 
 <div class="row">
-    <div class="col-xs-12">
-      <button class="btn btn-primary">Add to Basket</button>
-    </div>
+  <div class="col-xs-12">
+    <button class="btn btn-primary">Add to Basket</button>
   </div>
+</div>

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataStorageService } from 'app/shared/data-storage.service';
 import { Response } from '@angular/http';
 import { Product } from 'app/products/product.model';
+import { ProductsService } from 'app/products/products.service';
 
 
 @Component({
@@ -10,13 +11,19 @@ import { Product } from 'app/products/product.model';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
+
 export class ProductListComponent implements OnInit {
 
-  constructor(private dataStorageService: DataStorageService) { }
+  constructor(private dataStorageService: DataStorageService,
+              private productService: ProductsService) { }
 
-  ngOnInit() {}
   private products: Product[];
 
+  ngOnInit() {
+    this.products = this.productService.getProducts();
+  }
+
+ 
   onSaveData(){
     console.log("Save triggered from product-list component!");
     this.dataStorageService.storeProducts()
@@ -25,5 +32,12 @@ export class ProductListComponent implements OnInit {
           console.log(response);
         }
       );
-  }
+  };
+
+  onFetchData(){
+    console.log("Get triggered from product-list component!");
+    this.dataStorageService.getProducts();
+  };
+  
+
 }

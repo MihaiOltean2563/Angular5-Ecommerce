@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Product } from 'app/products/product.model';
+import { ProductsService } from 'app/products/products.service';
 
 
 @Component({
@@ -8,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductComponent implements OnInit {
 
-  constructor() { }
+  constructor(private productService: ProductsService) { }
+
+  private products: Product[];
+  selectedProduct: Product;
+  displayDialog: boolean;
 
   ngOnInit() {
+    this.products = this.productService.getProducts();
+    console.log("prods", this.products);
   }
 
+
+  selectProduct(product: Product){
+    this.selectedProduct = product;
+    this.displayDialog = true;
+  }
+  onDialogHide() {
+    this.selectedProduct = null;
+  }
+
+  addToCart(product: Product){
+    console.log('Added' + product + 'to Cart!');
+    this.productService.selectedProduct.emit(product);
+  }
 }
