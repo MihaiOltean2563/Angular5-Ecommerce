@@ -29,7 +29,6 @@ export class ProductsService {
     }
 
     addProductToCart(product: Product){
-        console.log("Product in prod.service", product);
         this.userBasketService.addProductToCart(product);
     }
 }

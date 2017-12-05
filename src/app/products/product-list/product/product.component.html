@@ -1,5 +1,5 @@
 
-<p-dataGrid [value]="products">
+<!-- <p-dataGrid [value]="products">
     <p-header>
        List of Products
      </p-header>
@@ -34,4 +34,17 @@
             <div class="">{{selectedProduct.snippet}}</div>
         </div>
     </div>
-</p-dialog>
+</p-dialog> -->
+
+<a href="#"
+(click)="onSelected()">
+    <div class="card" style="width: 20rem;">
+            <!-- <h3>{{product.name}}</h3> -->
+            <img class="card-img-top" [src]="product.imageUrl" alt="Card image cap" style="max-width:100%">  <!-- style="max-height:250px-->
+            <div class="card-body">
+                <h4 class="card-title">{{product.name}}</h4>
+                <p class="card-text">{{product.snippet}}Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+    </div>
+</a>

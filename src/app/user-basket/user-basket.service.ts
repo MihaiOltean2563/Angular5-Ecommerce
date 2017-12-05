@@ -8,23 +8,17 @@ export class UserBasketService implements OnInit{
 
     constructor(){}
 
-     products: Product[] = [
-        new Product('Motorola XOOM\u2122 with Wi-Fi','motorola','./assets/img/phones/motorola-xoom-with-wi-fi.0.jpg'),
-        new Product('Iphone 6s','motorola','./assets/img/phones/motorola-xoom-with-wi-fi.0.jpg')
-    ]
-    ngOnInit(){
-      
-    }
+    products: Product[] = [];
+
+    ngOnInit(){}
 
     getCartProducts(){
         return this.products.slice();
     }
-    addProductToCart(product: Product){
-        this.products.push(product);
+
+    addProductToCart(products: Product){
+        console.log(products);
+        this.products.push(products);
         this.cartChanged.emit(this.products.slice());
     }
-    // addProductToCart(products: Product[]){
-    //     this.products.push(...products);
-    //     this.cartChanged.emit(this.products.slice());
-    // }
 }

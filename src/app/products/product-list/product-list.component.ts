@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { DataStorageService } from 'app/shared/data-storage.service';
 import { Response } from '@angular/http';
@@ -19,17 +19,24 @@ export class ProductListComponent implements OnInit {
               private productService: ProductsService,
               private userBasketService: UserBasketService) { }
 
-  private products: Product[];
+  private products: Product[] = [
+    new Product('Motorola XOOM\u2122 with Wi-Fi','motorola',
+    './assets/img/phones/motorola-xoom-with-wi-fi.0.jpg'),
+    new Product('Motorola XOOM\u2122 with Wi-Fi','motorola',
+    'motorola-xoom.0.jpg'),
+    new Product('Motorola XOOM\u2122 with Wi-Fi','motorola',
+    './assets/img/phones/motorola-xoom-with-wi-fi.0.jpg'),
+  ];
+
+  @Output() selectedProduct = new EventEmitter<Product>();
 
   ngOnInit() {
     this.products = this.productService.getProducts();
-    this.userBasketService.cartChanged
-      .subscribe(
-        (cart: Product[]) => {
-          this.products = cart;
-          console.log("cart in prod-list: ", this.products);
-        }
-      )
+  }
+
+  onProductSelected(product: Product){
+    console.log("onProductSelected: ",product);
+    this.selectedProduct.emit(product);
   }
 
  

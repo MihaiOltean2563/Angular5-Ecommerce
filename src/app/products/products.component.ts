@@ -15,13 +15,13 @@ export class ProductsComponent implements OnInit {
   selectedProduct: Product;
 
   ngOnInit() {
-    this.productService.selectedProduct
-       .subscribe(
-         (product: Product) => {
-           this.selectedProduct = product;
-           console.log("selectedProduct", this.selectedProduct)
-         }
-       )
+    // this.productService.selectedProduct
+    //    .subscribe(
+    //      (product: Product) => {
+    //        this.selectedProduct = product;
+    //        console.log("selectedProduct", this.selectedProduct)
+    //      }
+    //    )
   }
   
 }

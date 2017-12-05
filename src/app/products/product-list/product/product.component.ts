@@ -12,7 +12,13 @@ export class ProductComponent implements OnInit {
 
   constructor(private productService: ProductsService) { }
 
-  private products: Product[];
+  @Input() product: Product;
+  @Output() productSelected = new EventEmitter<void>();
+
+  private products: Product[] = [
+
+  ];
+
   selectedProduct: Product;
   displayDialog: boolean;
 
@@ -20,12 +26,8 @@ export class ProductComponent implements OnInit {
     this.products = this.productService.getProducts();
   }
 
-  selectProduct(product: Product){
-    this.selectedProduct = product;
-    this.displayDialog = true;
-  }
-  onDialogHide() {
-    this.selectedProduct = null;
+  onSelected(){
+    this.productSelected.emit();
   }
 
   addToCart(product: Product){
