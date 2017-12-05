@@ -35,7 +35,7 @@ export class ProductListComponent implements OnInit {
   }
 
   onProductSelected(product: Product){
-    console.log("onProductSelected: ",product);
+    console.log("onProductSelected:",product);
     this.selectedProduct.emit(product);
   }
 
