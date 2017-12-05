@@ -15,8 +15,8 @@ export class ProductsService {
 
     private products: Product[] = [
         new Product('Motorola XOOM\u2122 with Wi-Fi','motorola','./assets/img/phones/motorola-xoom-with-wi-fi.0.jpg'),
-        new Product('Iphone 6s','motorola','./assets/img/phones/motorola-xoom-with-wi-fi.0.jpg'),
-        new Product('Samsung Galaxy X','motorola','./assets/img/phones/motorola-xoom-with-wi-fi.0.jpg'),
+        new Product('Iphone 6s','motorola','./assets/img/phones/samsung-gem.0.jpg'),
+        new Product('Samsung Galaxy X','motorola','./assets/img/phones/dell-streak-7.0.jpg'),
     ];
    
     getProducts() {

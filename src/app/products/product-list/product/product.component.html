@@ -1,50 +1,11 @@
 
-<!-- <p-dataGrid [value]="products">
-    <p-header>
-       List of Products
-     </p-header>
-    <ng-template let-product pTemplate="item">
-       <div class="ui-g-12 ui-md-3">
-         <p-panel [header]="product.name" [style]="{'text-align':'center', 'max-height': '500px'}">
-           <img [src]="product.imageUrl" width="100">
-           <div class="car-detail">{{product.snippet}}</div>
-           <hr class="ui-widget-content" style="border-top:0">
-   
-            <i class="fa fa-search pull-left" (click)="selectProduct(product)" style="cursor:pointer"></i>
-            <i class="fa fa-cart-plus fa-2x" (click)="addToCart(product)" aria-hidden="true" style="cursor:pointer"></i>
-
-        </p-panel>
-       </div>
-   </ng-template>
- </p-dataGrid>
-
- <p-dialog header="Product details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  (onAfterHide)="onDialogHide()">
-    <div class="ui-grid ui-grid-responsive ui-grid-pad" *ngIf="selectedProduct" style="font-size:16px;text-align:center;padding:20px">
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-12" style="text-align:center">
-              <img [src]="selectedProduct.imageUrl" style="max-height:100px">
-            </div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-4">Name: </div>
-            <div class="ui-grid-col-8">{{selectedProduct.name}}</div>
-        </div>
-        <div class="ui-grid-row">
-            <div class="">Description: </div><br>
-            <div class="">{{selectedProduct.snippet}}</div>
-        </div>
-    </div>
-</p-dialog> -->
-
-<a href="#"
-(click)="onSelected()">
-    <div class="card" style="width: 20rem;">
-            <!-- <h3>{{product.name}}</h3> -->
+    <div class="card" style="width: 20rem; border:1px solid #ccc">
             <img class="card-img-top" [src]="product.imageUrl" alt="Card image cap" style="max-width:100%">  <!-- style="max-height:250px-->
-            <div class="card-body">
+            <div class="card-body text-center">
                 <h4 class="card-title">{{product.name}}</h4>
                 <p class="card-text">{{product.snippet}}Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a href="#"(click)="onSelected()" class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                <a href="#" class="btn btn-primary"><i class="fa  fa-cart-plus" aria-hidden="true"></i></a>
             </div>
     </div>
-</a>
+
