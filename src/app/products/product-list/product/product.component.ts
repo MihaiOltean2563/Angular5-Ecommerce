@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { Product } from 'app/products/product.model';
 import { ProductsService } from 'app/products/products.service';
+import { UserBasketService } from 'app/user-basket/user-basket.service';
 
 
 @Component({
@@ -10,14 +11,12 @@ import { ProductsService } from 'app/products/products.service';
 })
 export class ProductComponent implements OnInit {
 
-  constructor(private productService: ProductsService) { }
+  constructor(private productService: ProductsService,
+              private userBasketService: UserBasketService) { }
 
   @Input() product: Product;
-  @Output() productSelected = new EventEmitter<void>();
 
-  private products: Product[] = [
-
-  ];
+  private products: Product[] = [];
 
   selectedProduct: Product;
   displayDialog: boolean;
@@ -27,10 +26,11 @@ export class ProductComponent implements OnInit {
   }
 
   onSelected(){
-    this.productSelected.emit();
+    this.productService.selectedProduct.emit(this.product);
   }
 
-  addToCart(product: Product){
-    this.productService.addProductToCart(product);
+  addToCart(){
+    console.log("Add to Cart: ", this.product);
+    this.userBasketService.addProductToCart(this.product);
   }
 }

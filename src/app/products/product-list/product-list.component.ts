@@ -19,25 +19,12 @@ export class ProductListComponent implements OnInit {
               private productService: ProductsService,
               private userBasketService: UserBasketService) { }
 
-  private products: Product[] = [
-    new Product('Motorola XOOM\u2122 with Wi-Fi','motorola',
-    './assets/img/phones/motorola-xoom-with-wi-fi.0.jpg'),
-    new Product('Motorola XOOM\u2122 with Wi-Fi','motorola',
-    'motorola-xoom.0.jpg'),
-    new Product('Motorola XOOM\u2122 with Wi-Fi','motorola',
-    './assets/img/phones/motorola-xoom-with-wi-fi.0.jpg'),
-  ];
-
-  @Output() selectedProduct = new EventEmitter<Product>();
+  private products: Product[] = [];
 
   ngOnInit() {
     this.products = this.productService.getProducts();
   }
 
-  onProductSelected(product: Product){
-    console.log("onProductSelected:",product);
-    this.selectedProduct.emit(product);
-  }
 
  
   onSaveData(){

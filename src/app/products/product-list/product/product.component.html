@@ -5,7 +5,7 @@
                 <h4 class="card-title">{{product.name}}</h4>
                 <p class="card-text">{{product.snippet}}Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 <a href="#"(click)="onSelected()" class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                <a href="#" class="btn btn-primary"><i class="fa  fa-cart-plus" aria-hidden="true"></i></a>
+                <a href="#" (click)="addToCart()"class="btn btn-primary"><i class="fa  fa-cart-plus" aria-hidden="true"></i></a>
             </div>
     </div>
 

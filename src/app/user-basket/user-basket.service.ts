@@ -8,7 +8,10 @@ export class UserBasketService implements OnInit{
 
     constructor(){}
 
-    products: Product[] = [];
+    private products: Product[] = [
+        new Product('Iphone 6s','motorola','./assets/img/phones/samsung-gem.0.jpg'),
+        new Product('Samsung Galaxy X','motorola','./assets/img/phones/dell-streak-7.0.jpg')
+    ];
 
     ngOnInit(){}
 
@@ -16,9 +19,9 @@ export class UserBasketService implements OnInit{
         return this.products.slice();
     }
 
-    addProductToCart(products: Product){
-        console.log(products);
-        this.products.push(products);
+    addProductToCart(product: Product){
+        console.log(product + " added to cart!");
+        this.products.push(product);
         this.cartChanged.emit(this.products.slice());
     }
 }

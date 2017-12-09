@@ -10,8 +10,7 @@
 
   <div class="row">
     <div class="col-xs-3" *ngFor="let prod of products">
-      <app-product [product]="prod"
-      (productSelected)="onProductSelected(prod)"></app-product>
+      <app-product [product]="prod"></app-product>
     </div>
   </div>
     
