@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Product } from 'app/products/product.model';
 import { ProductsService } from 'app/products/products.service';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
@@ -14,19 +14,13 @@ export class ProductComponent implements OnInit {
   constructor(private productService: ProductsService,
               private userBasketService: UserBasketService) { }
 
-  @Input() product: Product;
 
   private products: Product[] = [];
-
-  selectedProduct: Product;
-  displayDialog: boolean;
+  @Input() index: number;
+  @Input() product: Product;
 
   ngOnInit() {
-    this.products = this.productService.getProducts();
-  }
 
-  onSelected(){
-    this.productService.selectedProduct.emit(this.product);
   }
 
   addToCart(){

@@ -2,6 +2,7 @@
 
 <div class="container">
     <h1>App Component</h1>
-    <app-products *ngIf="loadedFeature === 'home'"></app-products>
-    <app-user-basket *ngIf="loadedFeature !== 'home'"></app-user-basket>
+    <!-- <app-products *ngIf="loadedFeature === 'home'"></app-products>
+    <app-user-basket *ngIf="loadedFeature !== 'home'"></app-user-basket> -->
+    <router-outlet></router-outlet>
 </div>

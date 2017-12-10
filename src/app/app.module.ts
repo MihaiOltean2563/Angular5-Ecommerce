@@ -13,6 +13,7 @@ import { ProductDetailComponent } from './products/product-detail/product-detail
 import { ProductComponent } from './products/product-list/product/product.component';
 import { UserBasketComponent } from './user-basket/user-basket.component';
 import { UserBasketEditComponent } from './user-basket/user-basket-edit/user-basket-edit.component';
+import { AppRoutingModule } from 'app/app.routing.module';
 
 //Services 
 import { ProductsService } from './products/products.service';
@@ -21,6 +22,8 @@ import { UserBasketService } from 'app/user-basket/user-basket.service';
 
 //PrimeFaces
 import { ButtonModule, SharedModule, DataGridModule, PanelModule, DialogModule } from 'primeng/primeng';
+import { ProductStartComponent } from './products/product-start/product-start.component';
+
 
 
 
@@ -33,7 +36,8 @@ import { ButtonModule, SharedModule, DataGridModule, PanelModule, DialogModule }
     ProductDetailComponent,
     ProductComponent,
     UserBasketComponent,
-    UserBasketEditComponent
+    UserBasketEditComponent,
+    ProductStartComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,8 @@ import { ButtonModule, SharedModule, DataGridModule, PanelModule, DialogModule }
     ButtonModule,
     DataGridModule,
     PanelModule,
-    DialogModule
+    DialogModule,
+    AppRoutingModule
   ],
   providers: [ProductsService, DataStorageService, UserBasketService],
   bootstrap: [AppComponent]

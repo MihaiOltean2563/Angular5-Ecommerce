@@ -16,7 +16,6 @@ export class UserBasketComponent implements OnInit {
   ngOnInit() {
     console.log("Cart init: ", this.products);
     this.products = this.userBasketService.getCartProducts();
-    console.log("prods in service: ",this.products);
 
     this.userBasketService.cartChanged
     .subscribe(

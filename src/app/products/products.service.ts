@@ -23,6 +23,10 @@ export class ProductsService {
         return this.products.slice();
     };
 
+    getProduct(index: number){
+        return this.products[index];
+    }
+
     setProducts(products: Product[]){
         this.products = products;
         this.productsChanged.next(this.products.slice());
