@@ -5,7 +5,8 @@ import { Response } from '@angular/http';
 import { Product } from 'app/products/product.model';
 import { ProductsService } from 'app/products/products.service';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
-
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-product-list',

@@ -24,7 +24,13 @@ import { UserBasketService } from 'app/user-basket/user-basket.service';
 import { ButtonModule, SharedModule, DataGridModule, PanelModule, DialogModule } from 'primeng/primeng';
 import { ProductStartComponent } from './products/product-start/product-start.component';
 
-
+//Ngx-Bootstrap
+// import { ComponentLoaderFactory } from 'ngx-bootstrap/component-loader';
+// import { ModalBackdropComponent } from 'ngx-bootstrap/modal/modal-backdrop.component';
+// import { PositioningService } from 'ngx-bootstrap/positioning';
+import { ModalModule } from 'ngx-bootstrap/modal';
+// import { BsModalService } from 'ngx-bootstrap/modal';
+// import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 
 @NgModule({
@@ -50,9 +56,15 @@ import { ProductStartComponent } from './products/product-start/product-start.co
     DataGridModule,
     PanelModule,
     DialogModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ModalModule.forRoot()
   ],
-  providers: [ProductsService, DataStorageService, UserBasketService],
+  providers: [
+    ProductsService, 
+    DataStorageService, 
+    UserBasketService,
+    // BsModalService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -35,4 +35,5 @@ export class ProductsService {
     addProductToCart(product: Product){
         this.userBasketService.addProductToCart(product);
     }
+
 }
