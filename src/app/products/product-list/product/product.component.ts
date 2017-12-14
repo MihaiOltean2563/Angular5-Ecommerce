@@ -40,4 +40,8 @@ export class ProductComponent implements OnInit {
     console.log("Add to Cart: ", this.product);
     this.userBasketService.addProductToCart(this.product);
   }
+
+  viewDetailedProductPage(index: number){
+    console.log('index', index);
+  }
 }

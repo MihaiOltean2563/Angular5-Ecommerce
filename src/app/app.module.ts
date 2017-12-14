@@ -25,13 +25,12 @@ import { ButtonModule, SharedModule, DataGridModule, PanelModule, DialogModule }
 import { ProductStartComponent } from './products/product-start/product-start.component';
 
 //Ngx-Bootstrap
-// import { ComponentLoaderFactory } from 'ngx-bootstrap/component-loader';
-// import { ModalBackdropComponent } from 'ngx-bootstrap/modal/modal-backdrop.component';
-// import { PositioningService } from 'ngx-bootstrap/positioning';
 import { ModalModule } from 'ngx-bootstrap/modal';
-// import { BsModalService } from 'ngx-bootstrap/modal';
-// import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
+//Directives
+import { ProductModalDirective } from 'app/shared/product-modal.directive';
 
 @NgModule({
   declarations: [
@@ -43,7 +42,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ProductComponent,
     UserBasketComponent,
     UserBasketEditComponent,
-    ProductStartComponent
+    ProductStartComponent,
+    ProductModalDirective
   ],
   imports: [
     BrowserModule,
