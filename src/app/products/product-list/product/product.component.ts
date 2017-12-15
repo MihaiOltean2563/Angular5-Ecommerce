@@ -11,6 +11,8 @@ import { UserBasketService } from 'app/user-basket/user-basket.service';
 
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { Routes, RouterModule, Router } from "@angular/router";
+
 
 @Component({
   selector: 'app-product',
@@ -21,7 +23,8 @@ export class ProductComponent implements OnInit {
 
   constructor(private productService: ProductsService,
               private userBasketService: UserBasketService,
-              private modalService: BsModalService) { }
+              private modalService: BsModalService,
+              private router: Router ) { }
 
 
   private products: Product[] = [];
@@ -43,5 +46,6 @@ export class ProductComponent implements OnInit {
 
   viewDetailedProductPage(index: number){
     console.log('index', index);
+    // this.router.navigate(['./products/' + index]);
   }
 }

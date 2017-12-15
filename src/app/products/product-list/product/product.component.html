@@ -15,8 +15,9 @@
             class="btn btn-success">
             <i class="fa  fa-cart-plus" aria-hidden="true"></i>
         </a>
-
-        <button class="btn btn-warning" (click)="viewDetailedProductPage(index)">Read more</button>
+        <a [routerLink]="[index]"(click)="viewDetailedProductPage(index)">
+            <button class="btn btn-warning" >Read more</button>
+        </a>
     </div>
 </div>
 

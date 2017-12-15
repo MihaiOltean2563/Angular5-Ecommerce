@@ -9,9 +9,9 @@ import { ProductDetailComponent } from "app/products/product-detail/product-deta
 const appRoutes: Routes = [
  { path: '', redirectTo: 'products', pathMatch: 'full' },
  { path: 'products', component: ProductsComponent, children: [
-     { path: '', component: ProductStartComponent},
-     { path: ':id', component: ProductDetailComponent}
+     { path: '', component: ProductStartComponent}
  ]},
+ { path: 'products/:id', component: ProductDetailComponent},
  { path: 'basket', component: UserBasketComponent}
 ];
 
