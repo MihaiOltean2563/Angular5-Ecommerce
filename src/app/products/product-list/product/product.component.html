@@ -4,7 +4,7 @@
     <div class="card-body text-center">
         <h4 class="card-title">{{product.name}}</h4>
         <p class="card-text">{{product.snippet}}Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
+        <p>{{product.price}}</p>
         <a (click)="openModal(template)"
             ProductModalDirective
             class="btn btn-primary">
@@ -15,7 +15,7 @@
             class="btn btn-success">
             <i class="fa  fa-cart-plus" aria-hidden="true"></i>
         </a>
-        <a [routerLink]="[index]"(click)="viewDetailedProductPage(index)">
+        <a [routerLink]="[index]" (click)="viewDetailedProductPage(index)">
             <button class="btn btn-warning" >Read more</button>
         </a>
     </div>
