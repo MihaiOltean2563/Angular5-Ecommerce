@@ -10,6 +10,7 @@ import { OrderSuccessComponent } from "app/order-success/order-success.component
 import { LoginComponent } from "app/login/login.component";
 import { AdminProductsComponent } from "app/admin/admin-products/admin-products.component";
 import { AdminOrdersComponent } from "app/admin/admin-orders/admin-orders.component";
+import { MyOrdersComponent } from "app/my-orders/my-orders.component";
 
 
 const appRoutes: Routes = [
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
  { path: 'products/:id', component: ProductDetailComponent},
  { path: 'basket', component: UserBasketComponent},
  { path: 'checkout', component: CheckoutComponent},
+ { path: 'my-orders', component: MyOrdersComponent},
  { path: 'order-success', component: OrderSuccessComponent},
  { path: 'login', component: LoginComponent},
  { path: 'admin/products', component: AdminProductsComponent},

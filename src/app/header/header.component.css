@@ -5,11 +5,14 @@
     background: url('../../assets/img/flags.png') no-repeat;
 }
 
-
 .flag.flag-gb {
     background-position: -16px 0;
 }
 
 .flag.flag-es {
     background-position: 0 0;
+}
+
+.cursorPointer{
+    cursor: pointer;
 }
