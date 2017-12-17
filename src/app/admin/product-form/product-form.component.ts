@@ -12,7 +12,7 @@ export class ProductFormComponent implements OnInit {
 
   constructor( categoryService: CategoryService) {
     this.categories$ = categoryService.getCategories();
-    console.log("categories",this.categories$ )
+    console.log("categories",this.categories$);
    }
 
   ngOnInit() {

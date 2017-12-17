@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database-deprecated';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class CategoryService {
 
-  constructor(private db: AngularFireDatabase) { }
+  observableCategories$: Observable<any>;
+
+  constructor(private db: AngularFireDatabase) {
+        this.observableCategories$ = this.db.list('/categories', {
+          query: {
+            orderByChild: 'name'
+          }
+        });
+   }
 
   getCategories(){
-    return this.db.list('/categories', {
-      query: {
-        orderByChild: 'name'
-      }
-    });
+    return this.observableCategories$;
   }
 }

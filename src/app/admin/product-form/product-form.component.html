@@ -15,7 +15,7 @@
     <select id="category" class="form-control">
       <option value="">Select</option>
       <option *ngFor="let c of categories$ | async"
-              [value]="c.$key">
+              [value]="c.key">
           {{ c.name }}
       </option>
     </select>
