@@ -9,7 +9,12 @@ import { CommonModule } from '@angular/common';
 
 //Angular Firebase
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import {
+  AngularFireDatabaseModule,
+  AngularFireDatabase, 
+  FirebaseListObservable, 
+  FirebaseObjectObservable } 
+from 'angularfire2/database-deprecated';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 
@@ -46,7 +51,10 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
-
+import { AuthService } from 'app/auth/auth.service';
+import { AuthGuard } from 'app/auth/auth.guard.service';
+import { UserService } from 'app/auth/user.service';
+import { AdminAuthGuard } from 'app/auth/admin-auth-guard.service';
 
 
 @NgModule({
@@ -85,7 +93,11 @@ import { LoginComponent } from './login/login.component';
   providers: [
     ProductsService, 
     DataStorageService, 
-    UserBasketService
+    UserBasketService,
+    AuthService,
+    AuthGuard,
+    UserService,
+    AdminAuthGuard
   ],
   bootstrap: [AppComponent]
 })

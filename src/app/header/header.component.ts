@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataStorageService } from 'app/shared/data-storage.service';
-
+import { AuthService } from 'app/auth/auth.service';
+import { AppUser } from 'app/models/app-user';
 
 @Component({
   selector: 'app-header',
@@ -9,16 +10,22 @@ import { DataStorageService } from 'app/shared/data-storage.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private dataStorageService: DataStorageService) { }
-  // @Output will make this event emitter usable from outside this component,e.g to listen to this event from the parent component
-  //@Output() featureSelected = new EventEmitter<string>();
+  appUser: AppUser;
+  
+  constructor(
+    private dataStorageService: DataStorageService,
+    private auth: AuthService){
+    auth.appUser$.subscribe(appUser => this.appUser = appUser)
+  }
+
 
   ngOnInit() {
   }
   
+  onSaveData(){}
 
-  onSaveData(){
-    
+  logout(){
+    this.auth.logout();
   }
 
 }
