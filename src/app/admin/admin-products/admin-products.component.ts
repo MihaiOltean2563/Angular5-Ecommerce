@@ -1,26 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService,  } from 'app/products/products.service';
 import { FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { AngularFireList } from 'angularfire2/database/interfaces';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { Subscriber } from 'rxjs/Subscriber';
 
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.css']
 })
-export class AdminProductsComponent implements OnInit {
+export class AdminProductsComponent implements OnInit, OnDestroy {
 
-  products$ : Observable<any[]>;
-  private listRef = this.db.list('products');
+  subscription: Subscription;
+  products : {title: string}[];
+  filteredProducts: any[];
 
-  constructor(private productService: ProductService, private db: AngularFireDatabase) {
-
-   }
-
-  ngOnInit() {
-    this.products$ = this.productService.getAll();
+  constructor(private productService: ProductService) {
+    this.subscription =  
+    this.productService.getAll()
+    .subscribe(products => {
+      this.products = products;
+      this.filteredProducts = this.products;
+    });
   }
+  
+  ngOnInit() {
+    
+  }
+  
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
+
+  filter(query: string){
+    this.filteredProducts = (query) ? 
+      this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) : 
+      this.products;
+  }
+
+  
 
 }
