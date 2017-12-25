@@ -56,7 +56,7 @@ export class ProductService {
             item => {
                 const $key = item.payload.key;
                 const data = { $key, ...item.payload.val() };
-                console.log("data from firebase: ", data)
+                // console.log("data from firebase: ", data)
                 return data;
           });
         });
@@ -66,4 +66,12 @@ export class ProductService {
         return this.db.object('/products/' + productId);
     }
 
+    update(productId, product){
+    // console.log("updated", product);
+       return this.db.object('/products/'+ productId).update(product);
+    }
+
+    delete(productId){
+        return this.db.object('/products/'+ productId).remove();
+    }
 }
