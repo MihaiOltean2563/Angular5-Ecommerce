@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Http, Response } from "@angular/http";
-import { ProductsService } from "app/products/products.service";
+import { ProductService } from "app/products/products.service";
 import { Product } from "app/products/product.model";
 
 @Injectable()
 export class DataStorageService {
     constructor(private http: Http,
-                private productService: ProductsService){}
+                private productService: ProductService){}
 
     storeProducts(){
         console.log("Save triggered from service!");

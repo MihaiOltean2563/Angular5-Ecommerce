@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DataStorageService } from 'app/shared/data-storage.service';
 import { Response } from '@angular/http';
 import { Product } from 'app/products/product.model';
-import { ProductsService } from 'app/products/products.service';
+import { ProductService } from 'app/products/products.service';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -17,7 +17,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 export class ProductListComponent implements OnInit {
 
   constructor(private dataStorageService: DataStorageService,
-              private productService: ProductsService,
+              private productService: ProductService,
               private userBasketService: UserBasketService) { }
 
   private products: Product[] = [];

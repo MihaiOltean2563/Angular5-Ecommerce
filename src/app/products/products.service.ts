@@ -3,16 +3,24 @@ import {Http, Response} from '@angular/http';
 import { Product } from 'app/products/product.model';
 import { Subject } from 'rxjs/Subject';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
+import { AngularFireDatabase,  } from 'angularfire2/database';
+import { FirebaseListObservable } from 'angularfire2/database-deprecated';
+import { AngularFireList } from 'angularfire2/database/interfaces';
 
 
 @Injectable()
-export class ProductsService {
-    constructor(private http: Http,
-                private userBasketService: UserBasketService){}
+export class ProductService {
 
+    constructor(private http: Http,
+                private userBasketService: UserBasketService,
+                private db: AngularFireDatabase){
+                    
+                }
+   
     productsChanged = new Subject<Product[]>();
     selectedProduct = new EventEmitter<Product>();
-
+    firebaseProducts$;
+    
     private products: Product[] = [
         new Product('Motorola XOOM\u2122 with Wi-Fi','motorola','./assets/img/phones/motorola-xoom-with-wi-fi.0.jpg'),
         new Product('Iphone 6s','motorola','./assets/img/phones/samsung-gem.0.jpg'),
@@ -32,8 +40,18 @@ export class ProductsService {
         this.productsChanged.next(this.products.slice());
     }
 
-    addProductToCart(product: Product){
-        this.userBasketService.addProductToCart(product);
+    // addProductToCart(product: Product){
+    //     this.userBasketService.addProductToCart(product);
+    // }
+
+    //Firebase
+    create(product){
+        console.log("Saved: " + product + "to Firebase DB !");
+        return this.db.list('/products').push(product);
+    }
+
+    getAll():AngularFireList<any>{
+        return this.db.list('/products');
     }
 
 }
