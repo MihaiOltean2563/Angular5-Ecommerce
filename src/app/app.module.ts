@@ -72,7 +72,7 @@ import { UserService } from 'app/auth/user.service';
 import { AdminAuthGuard } from 'app/auth/admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CategoryService } from './shared/category.service';
-
+import { DataTableModule } from 'angular-4-data-table';
 
 @NgModule({
   declarations: [

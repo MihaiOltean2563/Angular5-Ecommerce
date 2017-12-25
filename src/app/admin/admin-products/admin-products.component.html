@@ -9,6 +9,12 @@
     type="text" class="form-control" placeholder="Search">
 </p> 
 
+
+<!-- <data-table
+>
+
+</data-table> -->
+
 <table class="table">
     <thead>
         <tr>
@@ -20,7 +26,7 @@
     <tbody>
         <tr *ngFor="let p of filteredProducts">
             <td>{{ p.title }}</td>
-            <td>{{ p["price "] }}</td>
+            <td>{{ p.price | currency: 'USD' }}</td>
             <td>{{ p.category }}</td>
             <td>
                 <a [routerLink]="['/admin/products/', p.$key]">Edit</a>

@@ -6,6 +6,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Subscriber } from 'rxjs/Subscriber';
+import { Product } from 'app/models/product';
 
 @Component({
   selector: 'app-admin-products',
@@ -15,7 +16,7 @@ import { Subscriber } from 'rxjs/Subscriber';
 export class AdminProductsComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
-  products : {title: string}[];
+  products : Product[];
   filteredProducts: any[];
 
   constructor(private productService: ProductService) {
