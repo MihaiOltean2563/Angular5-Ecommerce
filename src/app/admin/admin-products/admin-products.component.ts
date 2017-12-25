@@ -12,15 +12,15 @@ import { Observable } from 'rxjs/Observable';
 })
 export class AdminProductsComponent implements OnInit {
 
-  products$: any[];
+  products$ : Observable<any[]>;
   private listRef = this.db.list('products');
-  items: Observable<any[]>;
 
   constructor(private productService: ProductService, private db: AngularFireDatabase) {
-    this.items = db.list('products').valueChanges();
+
    }
 
   ngOnInit() {
+    this.products$ = this.productService.getAll();
   }
 
 }
