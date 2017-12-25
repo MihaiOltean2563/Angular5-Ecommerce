@@ -50,10 +50,6 @@ export class ProductService {
         return this.db.list('/products').push(product);
     }
 
-    // getAll():AngularFireList<any>{
-    //     return this.db.list('/products');
-    // }
-
     getAll() {
         return this.db.list('/products').snapshotChanges().map(action => {
           return action.map(
@@ -64,6 +60,10 @@ export class ProductService {
                 return data;
           });
         });
-      }
+    }
+
+    get(productId){
+        return this.db.object('/products/' + productId);
+    }
 
 }
