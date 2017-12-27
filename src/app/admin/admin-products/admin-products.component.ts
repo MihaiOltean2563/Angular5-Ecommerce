@@ -18,7 +18,6 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
   products : Product[];
-  filteredProducts: any[];
   tableResource: DataTableResource<Product>;
   items: Product[] = [];
   itemCount: number;
@@ -28,7 +27,6 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     this.productService.getAll()
     .subscribe(products => {
       this.products = products;
-      this.filteredProducts = this.products;
       this.initializeTable(products);
     });
   }
@@ -58,9 +56,11 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   }
 
   filter(query: string){
-    this.filteredProducts = (query) ? 
+    let filteredProducts = (query) ? 
       this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) : 
       this.products;
+
+    this.initializeTable(filteredProducts);
   }
   
 }
