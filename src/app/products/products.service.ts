@@ -32,7 +32,7 @@ export class ProductService {
     };
 
     getProduct(index: number){
-        return this.products[index];
+        return this.firebaseProducts$[index];
     }
 
     setProducts(products: Product[]){

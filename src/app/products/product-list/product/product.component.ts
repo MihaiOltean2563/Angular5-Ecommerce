@@ -47,6 +47,5 @@ export class ProductComponent implements OnInit {
 
   viewDetailedProductPage(index: number){
     console.log('index', index);
-    // this.router.navigate(['./products/' + index]);
   }
 }
