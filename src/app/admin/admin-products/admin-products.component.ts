@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Subscriber } from 'rxjs/Subscriber';
 import { Product } from 'app/models/product';
+import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
 
 @Component({
   selector: 'app-admin-products',
@@ -18,6 +19,9 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   products : Product[];
   filteredProducts: any[];
+  tableResource: DataTableResource<Product>;
+  items: Product[] = [];
+  itemCount: number;
 
   constructor(private productService: ProductService) {
     this.subscription =  
@@ -25,9 +29,26 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     .subscribe(products => {
       this.products = products;
       this.filteredProducts = this.products;
+      this.initializeTable(products);
     });
   }
+
+  private initializeTable(products: Product[]){
+     //Initialize the data table
+     this.tableResource = new DataTableResource(products);
+     this.tableResource.query({offset: 0})
+       .then(items => this.items = items);
+     this.tableResource.count()
+       .then(count => this.itemCount = count);
+  }
   
+  reloadItems(params){
+    if(!this.tableResource) return;
+
+    this.tableResource.query(params)  
+      .then(items => this.items = items);
+  }
+
   ngOnInit() {
     
   }
@@ -41,7 +62,5 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
       this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) : 
       this.products;
   }
-
   
-
 }

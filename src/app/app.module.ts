@@ -18,16 +18,13 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireDatabaseModule } from "angularfire2/database-deprecated"
 
-// import {AngularFireDatabase,
-//   FirebaseListObservable, 
-//   FirebaseObjectObservable } 
-// from 'angularfire2/database-deprecated';
-
 // for AngularFireAuth
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 
+//other 3rd party libraries
+import {DataTableModule } from 'angular-4-data-table-bootstrap-4';
 
 
 //Components
@@ -72,7 +69,10 @@ import { UserService } from 'app/auth/user.service';
 import { AdminAuthGuard } from 'app/auth/admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CategoryService } from './shared/category.service';
-import { DataTableModule } from 'angular-4-data-table';
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -93,9 +93,9 @@ import { DataTableModule } from 'angular-4-data-table';
     AdminOrdersComponent,
     LoginComponent,
     ProductFormComponent
-    
   ],
   imports: [
+    DataTableModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
