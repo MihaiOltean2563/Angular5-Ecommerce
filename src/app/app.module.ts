@@ -12,6 +12,7 @@ import {HttpClientModule, HttpClient} from '@angular/common/http';
 //Angular Firebase
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 // for AngularFireDatabase
 // import { AngularFireDatabaseModule } from 'angularfire2/database';

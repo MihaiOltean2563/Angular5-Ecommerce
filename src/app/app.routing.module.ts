@@ -37,7 +37,7 @@ const appRoutes: Routes = [
      path: 'admin/products/:id', 
      component: ProductFormComponent, 
      canActivate: [AuthGuard, AdminAuthGuard]
- },
+ },    
  { 
     path: 'admin/products', 
     component: AdminProductsComponent, 
