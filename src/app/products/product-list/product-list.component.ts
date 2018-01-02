@@ -2,11 +2,13 @@ import { Component, OnInit, Input, Output, EventEmitter, TemplateRef, ElementRef
 
 import { DataStorageService } from 'app/shared/data-storage.service';
 import { Response } from '@angular/http';
-import { Product } from 'app/products/product.model';
+import { Product } from 'app/models/product';
 import { ProductService } from 'app/products/products.service';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { CategoryService } from 'app/shared/category.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -16,17 +18,34 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 export class ProductListComponent implements OnInit {
 
-  products$;
+  products: Product[] = [];
   modalRef: BsModalRef;
+  categories$;
+  category:string;
+  filteredProducts: Product[] = [];
 
   constructor(private dataStorageService: DataStorageService,
               private productService: ProductService,
               private userBasketService: UserBasketService,
-              private modalService: BsModalService) { 
-                this.products$ = productService.getAll();
-              }
+              private modalService: BsModalService,
+              private categoryService: CategoryService,
+              private route: ActivatedRoute) {
 
-  private products: Product[] = [];
+                productService.getAll().subscribe(products => {
+                  this.products = products;
+                  route.queryParamMap.subscribe(params => {
+                    this.category = params.get('category');
+  
+                    this.filteredProducts = (this.category) ? 
+                      this.products.filter( p => p.category === this.category) :
+                      this.products;
+                  });
+                });
+
+                this.categories$ = categoryService.getAll();
+
+               
+              }
 
   ngOnInit() {
   }
@@ -52,10 +71,10 @@ export class ProductListComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  addToCart(product: Product){
-    console.log("Add to Cart: ", product);
-    this.userBasketService.addProductToCart(product);
-  }
+  // addToCart(product: Product){
+  //   console.log("Add to Cart: ", product);
+  //   this.userBasketService.addProductToCart(product);
+  // }
 
   viewDetailedProductPage(index: number){
     console.log('index', index);

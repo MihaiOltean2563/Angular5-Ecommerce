@@ -27,6 +27,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     this.productService.getAll()
     .subscribe(products => {
       this.products = products;
+      console.log(this.products);
       this.initializeTable(products);
     });
   }

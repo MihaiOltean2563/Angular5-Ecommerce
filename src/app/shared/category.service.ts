@@ -15,7 +15,7 @@ export class CategoryService {
         });
    }
 
-  getCategories(){
+  getAll(){
     return this.observableCategories$;
   }
 }
