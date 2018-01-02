@@ -9,6 +9,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { CategoryService } from 'app/shared/category.service';
 import { ActivatedRoute } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-product-list',
@@ -31,16 +32,19 @@ export class ProductListComponent implements OnInit {
               private categoryService: CategoryService,
               private route: ActivatedRoute) {
 
-                productService.getAll().subscribe(products => {
-                  this.products = products;
-                  route.queryParamMap.subscribe(params => {
+                productService.getAll()
+                  .switchMap(products => {
+                    this.products = products;
+                    return route.queryParamMap;
+                  })
+
+                  .subscribe(params => {
                     this.category = params.get('category');
   
                     this.filteredProducts = (this.category) ? 
                       this.products.filter( p => p.category === this.category) :
                       this.products;
                   });
-                });
 
                 this.categories$ = categoryService.getAll();
 
