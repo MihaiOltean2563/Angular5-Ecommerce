@@ -22,7 +22,6 @@ export class ProductDetailComponent implements OnInit, AfterViewChecked {
               private productService: ProductService,
               private db: AngularFireDatabase) {
                 this.id = this.route.snapshot.paramMap.get('id');
-                console.log("id: ", this.id);
                 
                 if(this.id) {
                 this.productService

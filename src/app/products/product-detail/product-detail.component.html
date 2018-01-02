@@ -1,35 +1,9 @@
 
 <div class="card" style="width: 18rem;">
-  <img class="card-img-top" [src]="product.imageUrl" alt="Card image cap">
+  <img class="card-img-top" *ngIf="product.imageUrl" [src]="product.imageUrl" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">{{product.title}}</h5>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
     <a href="#" class="btn btn-primary">Go somewhere</a>
   </div>
 </div>
-<!--<div class="row">
-
-  <div class="col-xs-12">
-    <img [src]="product.imageUrl" alt="{{ product.title }}" class="img-responsive" style="max-height:200px;">
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <h1>{{ product.title }}</h1>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <h1> {{ product.category }}</h1>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <button class="btn btn-primary">Add to Basket</button>
-  </div>
-</div>-->
-
-

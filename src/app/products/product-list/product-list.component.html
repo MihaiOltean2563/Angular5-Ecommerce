@@ -16,7 +16,6 @@
           <img class="card-img-top" [src]="p.imageUrl" alt="Card image cap" style="max-width:100%">
           <div class="card-body text-center">
             <h5 class="card-title">{{p.title}}</h5>
-            <p class="card-text">{{p.snippet}}</p>
             <p class="card-text">{{p.price | currency: 'USD'}}</p>
             <a (click)="openModal(template)"
                 ProductModalDirective
@@ -28,9 +27,6 @@
                 class="btn btn-success">
                 <i class="fa  fa-cart-plus" aria-hidden="true"></i>
             </a>
-            <!-- <a [routerLink]="[i]" (click)="viewDetailedProductPage(i)">
-                <button class="btn btn-warning">Read more</button>
-            </a> -->
             <a [routerLink]="['/products/', p.$key]">
               <button class="btn btn-warning">Read more</button>
             </a>
