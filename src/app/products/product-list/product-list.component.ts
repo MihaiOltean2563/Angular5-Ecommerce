@@ -4,10 +4,8 @@ import { DataStorageService } from 'app/shared/data-storage.service';
 import { Response } from '@angular/http';
 import { Product } from 'app/models/product';
 import { ProductService } from 'app/products/products.service';
-import { UserBasketService } from 'app/user-basket/user-basket.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { CategoryService } from 'app/shared/category.service';
 import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 
@@ -21,15 +19,13 @@ export class ProductListComponent implements OnInit {
 
   products: Product[] = [];
   modalRef: BsModalRef;
-  categories$;
+  
   category:string;
   filteredProducts: Product[] = [];
 
   constructor(private dataStorageService: DataStorageService,
               private productService: ProductService,
-              private userBasketService: UserBasketService,
               private modalService: BsModalService,
-              private categoryService: CategoryService,
               private route: ActivatedRoute) {
 
                 productService.getAll()
@@ -46,7 +42,6 @@ export class ProductListComponent implements OnInit {
                       this.products;
                   });
 
-                this.categories$ = categoryService.getAll();
 
                
               }
