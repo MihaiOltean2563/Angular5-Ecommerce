@@ -1,36 +1,47 @@
 
-<div class="card" style="width: 20rem; border:1px solid #ccc">
-    <img class="card-img-top" [src]="product.imageUrl" alt="Card image cap" style="max-width:100%">
+  <div *ngIf="product.title" class="card ">
+    <img class="card-img-top" 
+    [src]="product.imageUrl" 
+    alt="{{product.title}}" 
+    style="max-width:100%"
+    *ngIf="product.imageUrl">
+
     <div class="card-body text-center">
-        <h4 class="card-title">{{product.name}}</h4>
-        <p class="card-text">{{product.snippet}}</p>
-        <p>{{product.price}}</p>
-        <a (click)="openModal(template)"
+      <h5 class="card-title">{{product.title}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{product.category}}</h6>
+      <p class="card-text">{{product.price | currency: 'USD'}}</p>
+    </div>
+
+    <div class="card-footer">
+        <div class="card-actions" *ngIf="showActions">
+            <a (click)="openModal(template)"
             ProductModalDirective
             class="btn btn-primary">
             <i class="fa fa-eye" aria-hidden="true"></i>
-        </a>
-
-        <a (click)="addToCart()"
-            class="btn btn-success">
-            <i class="fa  fa-cart-plus" aria-hidden="true"></i>
-        </a>
-        <a [routerLink]="[index]" (click)="viewDetailedProductPage(index)">
-            <button class="btn btn-warning" >Read more</button>
-        </a>
+            </a>
+    
+            <a (click)="addToCart(product)"
+                class="btn btn-success">
+                <i class="fa fa-cart-plus" aria-hidden="true"></i>
+            </a>
+            <a [routerLink]="['/products/', product.$key]" class="btn btn-warning">
+                Read more
+            </a>
+          </div>
     </div>
-</div>
+  </div>
 
-<ng-template #template>
+   <!-- Modal Template-->
+   <ng-template #template>
     <div class="modal-header">
-      <h4 class="modal-title pull-left">{{product.name}}</h4>
+      <h4 class="modal-title pull-left">{{product.title}}</h4>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-        <img [src]="product.imageUrl" alt="{{ product.name }}" class="img-responsive" style="max-height:200px;">
-        {{product.snippet}}
+        <img [src]="product.imageUrl" alt="{{ product.title }}" class="img-responsive" style="max-height:200px;">
+        <p>Category: {{product.category}}</p>
     </div>
     <div class="modal-footer">
         <button class="btn btn-success">Add to Basket</button>

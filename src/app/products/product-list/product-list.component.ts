@@ -18,14 +18,12 @@ import 'rxjs/add/operator/switchMap';
 export class ProductListComponent implements OnInit {
 
   products: Product[] = [];
-  modalRef: BsModalRef;
   
   category:string;
   filteredProducts: Product[] = [];
 
   constructor(private dataStorageService: DataStorageService,
               private productService: ProductService,
-              private modalService: BsModalService,
               private route: ActivatedRoute) {
 
                 productService.getAll()
@@ -41,9 +39,6 @@ export class ProductListComponent implements OnInit {
                       this.products.filter( p => p.category === this.category) :
                       this.products;
                   });
-
-
-               
               }
 
   ngOnInit() {
@@ -66,17 +61,5 @@ export class ProductListComponent implements OnInit {
     this.dataStorageService.getProducts();
   };
   
-  openModal(template: TemplateRef<ElementRef>){
-    this.modalRef = this.modalService.show(template);
-  }
-
-  // addToCart(product: Product){
-  //   console.log("Add to Cart: ", product);
-  //   this.userBasketService.addProductToCart(product);
-  // }
-
-  viewDetailedProductPage(index: number){
-    console.log('index', index);
-  }
 
 }

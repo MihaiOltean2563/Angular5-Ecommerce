@@ -30,9 +30,9 @@ export class ProductComponent implements OnInit {
               
   private products: Product[] = [];
   @Input() index: number;
-  @Input() product: Product;
+  @Input('product') product: Product;
   modalRef: BsModalRef;
-
+  @Input('show-actions') showActions = true;
 
   ngOnInit() {}
 
