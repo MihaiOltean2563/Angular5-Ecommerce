@@ -20,10 +20,11 @@
             <i class="fa fa-eye" aria-hidden="true"></i>
             </a>
     
-            <a (click)="addToCart(product)"
+            <button (click)="addToCart(product)"
                 class="btn btn-success">
                 <i class="fa fa-cart-plus" aria-hidden="true"></i>
-            </a>
+            </button>
+            
             <a [routerLink]="['/products/', product.$key]" class="btn btn-warning">
                 Read more
             </a>

@@ -5,7 +5,7 @@ import {
   Input,
   ElementRef } from '@angular/core';
 
-import { Product } from 'app/products/product.model';
+import { Product } from 'app/models/product';
 import { ProductService } from 'app/products/products.service';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
 
@@ -23,7 +23,7 @@ import { Observable } from 'rxjs/Observable';
 export class ProductComponent implements OnInit {
 
   constructor(private productService: ProductService,
-              private userBasketService: UserBasketService,
+              private cartService: UserBasketService,
               private modalService: BsModalService,
               private router: Router) {}
 
@@ -40,12 +40,9 @@ export class ProductComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  addToCart(){
-    console.log("Add to Cart: ", this.product);
-    this.userBasketService.addProductToCart(this.product);
+  addToCart(product: Product){
+    this.cartService.addToCart(product);
+    console.log("Add to Cart: ", product);
   }
 
-  viewDetailedProductPage(index: number){
-    console.log('index', index);
-  }
 }
