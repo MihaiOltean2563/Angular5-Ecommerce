@@ -18,7 +18,7 @@ export class UserBasketService implements OnInit{
         });
     }
 
-    private async getOrCreateCartId(){
+    private async getOrCreateCartId(): Promise<string>{
         let cartId = localStorage.getItem('cardId');
         if(cartId) return cartId;
         let result = await this.create();
@@ -26,22 +26,27 @@ export class UserBasketService implements OnInit{
         return result.key;
     }
 
-    private getCart(cartId: string){
+    async getCart(){
+        let cartId = await this.getOrCreateCartId();
         return this.db.object('/shopping-carts/' + cartId);
+    }
+
+    private getItem(cartId: string, productId: string){
+        return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
     }
 
     async addToCart(product: Product){
         let cartId = await this.getOrCreateCartId();
         
-        let item$ = this.db.object('/shopping-carts/' + cartId + '/items/' + product.$key);
+        let item$ = this.getItem(cartId, product.$key);
         
         item$.snapshotChanges()
              .take(1)
              .subscribe(item => {
                  if(item.payload.exists()){
-                     item$.update({quantity: item.payload.val().quantity + 1})
+                     item$.update({ quantity: item.payload.val().quantity + 1})
                  }else{
-                     item$.set({
+                     item$.update({
                          product: {
                             title: product.title,
                             price: product.price,

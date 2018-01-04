@@ -29,12 +29,13 @@ export class ProductComponent implements OnInit {
 
               
   private products: Product[] = [];
-  @Input() index: number;
-  @Input('product') product: Product;
   modalRef: BsModalRef;
+  @Input('product') product: Product;
   @Input('show-actions') showActions = true;
+  @Input('shopping-cart') shoppingCart;
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   openModal(template: TemplateRef<ElementRef>){
     this.modalRef = this.modalService.show(template);
@@ -43,6 +44,18 @@ export class ProductComponent implements OnInit {
   addToCart(product: Product){
     this.cartService.addToCart(product);
     console.log("Add to Cart: ", product);
+  }
+  
+    getQuantity(){
+    // let cart$ = (await this.cartService.getCart()).valueChanges();
+    // return cart$.subscribe( cart => {
+    //   if(!cart) return 0;
+    //   return cart.items[this.product.$key]['quantity'];
+    // })
+    if(!this.shoppingCart) return 0;
+  
+    let item = this.shoppingCart.items[this.product.$key];
+    return item ? item.quantity : 0;
   }
 
 }

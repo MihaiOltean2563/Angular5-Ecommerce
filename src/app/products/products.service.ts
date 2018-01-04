@@ -21,24 +21,24 @@ export class ProductService {
     selectedProduct = new EventEmitter<Product>();
     firebaseProducts$;
     
-    private products: Product[] = [
-        new Product('Motorola XOOM\u2122 with Wi-Fi','motorola','./assets/img/phones/motorola-xoom-with-wi-fi.0.jpg'),
-        new Product('Iphone 6s','motorola','./assets/img/phones/samsung-gem.0.jpg'),
-        new Product('Samsung Galaxy X','motorola','./assets/img/phones/dell-streak-7.0.jpg'),
-    ];
+    // private products: Product[] = [
+    //     new Product('Motorola XOOM\u2122 with Wi-Fi','motorola','./assets/img/phones/motorola-xoom-with-wi-fi.0.jpg'),
+    //     new Product('Iphone 6s','motorola','./assets/img/phones/samsung-gem.0.jpg'),
+    //     new Product('Samsung Galaxy X','motorola','./assets/img/phones/dell-streak-7.0.jpg'),
+    // ];
    
-    getProducts() {
-        return this.products.slice();
-    };
+    // getProducts() {
+    //     return this.products.slice();
+    // };
 
-    getProduct(index: number){
-        return this.firebaseProducts$[index];
-    }
+    // getProduct(index: number){
+    //     return this.firebaseProducts$[index];
+    // }
 
-    setProducts(products: Product[]){
-        this.products = products;
-        this.productsChanged.next(this.products.slice());
-    }
+    // setProducts(products: Product[]){
+    //     this.products = products;
+    //     this.productsChanged.next(this.products.slice());
+    // }
 
     // addProductToCart(product: Product){
     //     this.userBasketService.addProductToCart(product);

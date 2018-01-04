@@ -12,8 +12,8 @@
       <p class="card-text">{{product.price | currency: 'USD'}}</p>
     </div>
 
-    <div class="card-footer">
-        <div class="card-actions" *ngIf="showActions">
+    <div class="card-footer" *ngIf="showActions">
+        <div class="card-actions" >
             <a (click)="openModal(template)"
             ProductModalDirective
             class="btn btn-primary">
@@ -28,6 +28,7 @@
             <a [routerLink]="['/products/', product.$key]" class="btn btn-warning">
                 Read more
             </a>
+            <div>{{ getQuantity() }}</div>
           </div>
     </div>
   </div>

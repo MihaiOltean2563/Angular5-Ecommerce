@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, TemplateRef, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, TemplateRef, ElementRef } from '@angular/core';
 
 import { DataStorageService } from 'app/shared/data-storage.service';
 import { Response } from '@angular/http';
@@ -8,6 +8,8 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
+import { UserBasketService } from 'app/user-basket/user-basket.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-product-list',
@@ -15,16 +17,18 @@ import 'rxjs/add/operator/switchMap';
   styleUrls: ['./product-list.component.css']
 })
 
-export class ProductListComponent implements OnInit {
+export class ProductListComponent implements OnInit, OnDestroy {
 
   products: Product[] = [];
-  
   category:string;
   filteredProducts: Product[] = [];
+  cart: any;
+  subscription: Subscription;
 
   constructor(private dataStorageService: DataStorageService,
               private productService: ProductService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private shoppingCartService: UserBasketService) {
 
                 productService.getAll()
                   .switchMap(products => {
@@ -39,27 +43,39 @@ export class ProductListComponent implements OnInit {
                       this.products.filter( p => p.category === this.category) :
                       this.products;
                   });
+
+                
               }
+    
 
-  ngOnInit() {
+  async ngOnInit() {
+    let subscription = (await this.shoppingCartService.getCart())
+    .valueChanges()
+    .subscribe(cart => {
+      this.cart = cart;
+      console.log("cart: ", this.cart);
+    })
   }
-
+  
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
   
  
-  onSaveData(){
-    console.log("Save triggered from product-list component!");
-    this.dataStorageService.storeProducts()
-      .subscribe(
-        (response: Response) =>{
-          console.log(response);
-        }
-      );
-  };
+  // onSaveData(){
+  //   console.log("Save triggered from product-list component!");
+  //   this.dataStorageService.storeProducts()
+  //     .subscribe(
+  //       (response: Response) =>{
+  //         console.log(response);
+  //       }
+  //     );
+  // };
 
-  onFetchData(){
-    console.log("Get triggered from product-list component!");
-    this.dataStorageService.getProducts();
-  };
+  // onFetchData(){
+  //   console.log("Get triggered from product-list component!");
+  //   this.dataStorageService.getProducts();
+  // };
   
 
 }
