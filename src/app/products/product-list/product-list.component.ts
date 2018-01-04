@@ -49,12 +49,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
     
 
   async ngOnInit() {
-    let subscription = (await this.shoppingCartService.getCart())
-    .valueChanges()
-    .subscribe(cart => {
-      this.cart = cart;
-      console.log("cart: ", this.cart);
-    })
+     this.subscription = (await this.shoppingCartService.getCart())
+      .valueChanges()
+      .subscribe(cart => {
+        this.cart = cart;
+      })
   }
   
   ngOnDestroy(){
