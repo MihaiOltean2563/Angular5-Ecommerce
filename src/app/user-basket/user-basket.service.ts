@@ -1,7 +1,9 @@
 import {  Injectable, OnInit, EventEmitter } from "@angular/core";
 import { Product } from "app/models/product";
-import { AngularFireDatabase } from "angularfire2/database-deprecated";
+import { AngularFireDatabase } from "angularfire2/database";
 import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/map';
+import { AngularFireObject } from "angularfire2/database";
 
 @Injectable()
 export class UserBasketService implements OnInit{
@@ -30,10 +32,25 @@ export class UserBasketService implements OnInit{
 
     async addToCart(product: Product){
         let cartId = await this.getOrCreateCartId();
-        let item$ = this.db.object('/shopping-carts/' + cartId + '/items/' + product.key);
-        item$.take(1).subscribe(item => {
-            if(item.$exists()) item$.update({quantity: item.quantity + 1});
-            else item$.set({product: product, quantity: 1});
-        });
+        
+        let item$ = this.db.object('/shopping-carts/' + cartId + '/items/' + product.$key);
+        
+        item$.snapshotChanges()
+             .take(1)
+             .subscribe(item => {
+                 if(item.payload.exists()){
+                     item$.update({quantity: item.payload.val().quantity + 1})
+                 }else{
+                     item$.set({
+                         product: {
+                            title: product.title,
+                            price: product.price,
+                            category: product.category,
+                            imageUrl: product.imageUrl,
+                          },
+                         quantity: 1
+                     })
+                 }
+             });
     }
 }
