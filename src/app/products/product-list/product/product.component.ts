@@ -41,17 +41,16 @@ export class ProductComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  addToCart(product: Product){
-    this.cartService.addToCart(product);
-    console.log("Add to Cart: ", product);
+  addToCart(){
+    this.cartService.addToCart(this.product);
+    console.log("Added to Cart: ", this.product);
+  }
+
+  removeFromCart(){
+    this.cartService.removeFromCart(this.product);
   }
   
-    getQuantity(){
-    // let cart$ = (await this.cartService.getCart()).valueChanges();
-    // return cart$.subscribe( cart => {
-    //   if(!cart) return 0;
-    //   return cart.items[this.product.$key]['quantity'];
-    // })
+  getQuantity(){
     if(!this.shoppingCart) return 0;
   
     let item = this.shoppingCart.items[this.product.$key];

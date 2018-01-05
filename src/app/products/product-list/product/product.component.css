@@ -5,9 +5,11 @@
     padding:0;
 }
 
-a, button{
+.card-footer a, button{
     border-radius:0;
 }
+
+
 
 a, button:hover{
     cursor:pointer;
