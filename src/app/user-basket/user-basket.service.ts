@@ -1,9 +1,9 @@
 import {  Injectable, OnInit, EventEmitter } from "@angular/core";
 import { Product } from "app/models/product";
 import { AngularFireDatabase } from "angularfire2/database";
-// import { Observable } from "rxjs/Observable";
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/map';
 
 import { AngularFireObject } from "angularfire2/database";
 import { ShoppingCart } from "app/models/shopping-cart";
@@ -22,16 +22,18 @@ export class UserBasketService implements OnInit{
     }
 
     private async getOrCreateCartId(): Promise<string>{
-        let cartId = localStorage.getItem('cardId');
+        let cartId = localStorage.getItem('cartId');
         if(cartId) return cartId;
         let result = await this.create();
-        localStorage.setItem('cardId', result.key);
+        localStorage.setItem('cartId', result.key);
         return result.key;
     }
 
-    async getCart(): Promise<AngularFireObject<ShoppingCart>>{
+    async getCart(): Promise<Observable<ShoppingCart>>{
         let cartId = await this.getOrCreateCartId();
-        return this.db.object('/shopping-carts/' + cartId);
+        return this.db.object('/shopping-carts/' + cartId)
+            .valueChanges()
+            .map(x => new ShoppingCart(x.items))
     }
 
     private getItem(cartId: string, productId: string){

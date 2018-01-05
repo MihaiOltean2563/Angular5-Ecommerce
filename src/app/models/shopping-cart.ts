@@ -1,9 +1,8 @@
 import { ShoppingCartItem } from "app/models/shopping-cart-item";
 
 export class ShoppingCart {
-
-    constructor(public items: ShoppingCartItem[]){}
-
+    
+    constructor(public items: ShoppingCartItem) {}
     get totalItemsCount(){
         let count = 0;
         
@@ -11,5 +10,9 @@ export class ShoppingCart {
           count += this.items[productId].quantity;
           return count;
         }
+    }
+
+    get productIds(){
+        return Object.keys(this.items);
     }
 }

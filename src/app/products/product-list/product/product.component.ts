@@ -28,7 +28,6 @@ export class ProductComponent implements OnInit {
               private router: Router) {}
 
               
-  private products: Product[] = [];
   modalRef: BsModalRef;
   @Input('product') product: Product;
   @Input('show-actions') showActions = true;

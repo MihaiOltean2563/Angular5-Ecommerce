@@ -10,8 +10,8 @@
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/basket">
             Shopping Cart
-            <span class="badge badge-warning badge-pill">
-              {{ shoppingCartItemCount }}
+            <span class="badge badge-warning badge-pill" *ngIf="cart$ | async as cart">
+              {{ cart.totalItemsCount }}
             </span>
           </a>
         </li>
