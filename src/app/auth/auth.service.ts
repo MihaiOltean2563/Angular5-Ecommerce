@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'app/auth/user.service';
 import { AppUser } from 'app/models/app-user';
 import 'rxjs/add/operator/switchMap';
+import { UserBasketService } from 'app/user-basket/user-basket.service';
 
 @Injectable()
 export class AuthService {
@@ -14,9 +15,11 @@ export class AuthService {
    constructor(
     private userService: UserService,
     private afAuth: AngularFireAuth, 
-    private route: ActivatedRoute) { 
-    this.user$ = afAuth.authState;  
-  }
+    private route: ActivatedRoute,
+    private cartService: UserBasketService) {
+      this.user$ = this.afAuth.authState;
+    }
+
 
   login(){
     let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';

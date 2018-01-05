@@ -59,22 +59,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.subscription.unsubscribe();
   }
-  
- 
-  // onSaveData(){
-  //   console.log("Save triggered from product-list component!");
-  //   this.dataStorageService.storeProducts()
-  //     .subscribe(
-  //       (response: Response) =>{
-  //         console.log(response);
-  //       }
-  //     );
-  // };
 
-  // onFetchData(){
-  //   console.log("Get triggered from product-list component!");
-  //   this.dataStorageService.getProducts();
-  // };
-  
 
 }

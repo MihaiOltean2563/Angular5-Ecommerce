@@ -1,9 +1,12 @@
 import {  Injectable, OnInit, EventEmitter } from "@angular/core";
 import { Product } from "app/models/product";
 import { AngularFireDatabase } from "angularfire2/database";
+// import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/take';
-import 'rxjs/add/operator/map';
+
 import { AngularFireObject } from "angularfire2/database";
+import { ShoppingCart } from "app/models/shopping-cart";
 
 @Injectable()
 export class UserBasketService implements OnInit{
@@ -26,7 +29,7 @@ export class UserBasketService implements OnInit{
         return result.key;
     }
 
-    async getCart(){
+    async getCart(): Promise<AngularFireObject<ShoppingCart>>{
         let cartId = await this.getOrCreateCartId();
         return this.db.object('/shopping-carts/' + cartId);
     }
@@ -66,4 +69,5 @@ export class UserBasketService implements OnInit{
                  }
              });
     }
+
 }

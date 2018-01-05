@@ -1,7 +1,10 @@
+import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 import { DataStorageService } from 'app/shared/data-storage.service';
 import { AuthService } from 'app/auth/auth.service';
 import { AppUser } from 'app/models/app-user';
+import { UserBasketService } from 'app/user-basket/user-basket.service';
+import { ShoppingCart } from 'app/models/shopping-cart';
 
 @Component({
   selector: 'app-header',
@@ -11,18 +14,29 @@ import { AppUser } from 'app/models/app-user';
 export class HeaderComponent implements OnInit {
 
   appUser: AppUser;
-  
+  cart$: Observable<ShoppingCart>;
+  shoppingCartItemCount: number;
+
   constructor(
     private dataStorageService: DataStorageService,
-    private auth: AuthService){
-    auth.appUser$.subscribe(appUser => this.appUser = appUser)
+    private auth: AuthService,
+    private cartService: UserBasketService){
   }
 
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
+    let cart$ = await this.cartService.getCart();
+    cart$
+    .valueChanges()
+    .subscribe(cart => {
+      this.shoppingCartItemCount = 0;
+      for(let productId in cart.items){
+        this.shoppingCartItemCount += cart.items[productId].quantity;
+      }
+    })
   }
   
-  onSaveData(){}
 
   logout(){
     this.auth.logout();
