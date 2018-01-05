@@ -4,3 +4,21 @@
 .card-footer{
     padding:0;
 }
+
+a, button{
+    border-radius:0;
+}
+
+a, button:hover{
+    cursor:pointer;
+}
+
+
+a.btn-warning{
+    float:right;
+    width:100%;
+}
+.shift-right{
+    position:relative;
+    left:2px;
+}
