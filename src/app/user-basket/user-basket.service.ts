@@ -7,11 +7,15 @@ import 'rxjs/add/operator/map';
 
 import { AngularFireObject } from "angularfire2/database";
 import { ShoppingCart } from "app/models/shopping-cart";
+// import { AngularFirestore, 
+//     AngularFirestoreDocument, 
+//     AngularFirestoreCollection } from 'angularfire2/firestore';
 
 @Injectable()
 export class UserBasketService implements OnInit{
 
-    constructor(private db: AngularFireDatabase){}
+    constructor(private db: AngularFireDatabase,
+        ){} //private afs: AngularFirestore
 
     ngOnInit(){}
 
@@ -26,14 +30,18 @@ export class UserBasketService implements OnInit{
         if(cartId) return cartId;
         let result = await this.create();
         localStorage.setItem('cartId', result.key);
+        console.log("cart id returned: ", result);
         return result.key;
     }
 
-    async getCart(): Promise<Observable<ShoppingCart>>{
+    async getCart(){
         let cartId = await this.getOrCreateCartId();
-        return this.db.object('/shopping-carts/' + cartId)
-            .valueChanges()
-            .map(x => new ShoppingCart(x.items))
+        console.log("cart Id: ", cartId)
+        const item: AngularFireObject<ShoppingCart> = this.db.object('/shopping-carts/' + cartId)
+        console.log("getCart returns: ", item.valueChanges().subscribe(data => new ShoppingCart(data.items)));
+        return item
+        .valueChanges()
+        .map(data => new ShoppingCart(data.items));
     }
 
     private getItem(cartId: string, productId: string){
