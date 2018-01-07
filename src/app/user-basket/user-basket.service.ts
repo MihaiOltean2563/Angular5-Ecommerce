@@ -34,14 +34,17 @@ export class UserBasketService implements OnInit{
         return result.key;
     }
 
-    async getCart(){
+    async getCart(): Promise<AngularFireObject<ShoppingCart>>{
         let cartId = await this.getOrCreateCartId();
-        console.log("cart Id: ", cartId)
-        const item: AngularFireObject<ShoppingCart> = this.db.object('/shopping-carts/' + cartId)
-        console.log("getCart returns: ", item.valueChanges().subscribe(data => new ShoppingCart(data.items)));
-        return item
-        .valueChanges()
-        .map(data => new ShoppingCart(data.items));
+        return this.db.object('/shopping-carts/' + cartId);
+        // console.log("cart Id: ", cartId)
+        // const item: AngularFireObject<ShoppingCart> = this.db.object('/shopping-carts/' + cartId)
+        // return item
+        // .valueChanges()
+        // .map(data => {
+        //     console.log(data);
+        //     new ShoppingCart(data.items);
+        // })
     }
 
     private getItem(cartId: string, productId: string){
@@ -78,6 +81,20 @@ export class UserBasketService implements OnInit{
                      })
                  }
              });
+    }
+
+    async totalQty() {
+        let count: number;
+        let cart$ = await this.getCart();
+        return cart$
+        .valueChanges()
+        .map(cart => {
+            console.log("cart: ", cart)
+            count = 0;
+            for (let prodId in cart.items) 
+            count += cart.items[prodId].quantity;
+            return count;
+        });
     }
 
 }

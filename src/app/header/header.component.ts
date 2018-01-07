@@ -18,8 +18,10 @@ export class HeaderComponent implements OnInit {
 
   appUser: AppUser;
   // cart$: ShoppingCart;
-  cart$: Observable<ShoppingCart>;
+  // cart$: Observable<ShoppingCart>;
   cart: any;
+  // count: Observable<number>;
+  count: number;
 
   constructor(
     private dataStorageService: DataStorageService,
@@ -31,7 +33,12 @@ export class HeaderComponent implements OnInit {
   async ngOnInit() {
     this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
 
-    this.cart$ = await this.cartService.getCart();
+    let cart$ = await this.cartService.totalQty()
+      .then( count => {
+        count.subscribe(count => this.count = count);
+      })
+    // cart$.subscribe( count => this.count = count);
+    console.log("count: ", this.count);
   }
   
 

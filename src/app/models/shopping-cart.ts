@@ -5,10 +5,10 @@ export class ShoppingCart {
         console.log("items in cart model: ", this.items);
         console.log(this.totalItemsCount);
     }
-    get totalItemsCount(): number{
+    get totalItemsCount(){
         let count = 0;
         console.log("items in method: " , this.items);
-        
+
         for(let productId in this.items){
           count += this.items[productId].quantity;
           console.log('last count: ', count);

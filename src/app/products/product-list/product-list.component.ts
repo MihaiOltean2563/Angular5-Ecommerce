@@ -51,7 +51,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   async ngOnInit() {
      this.subscription = (await this.shoppingCartService.getCart())
       // .map(x => console.log("x", x))
-      // valueChanges()
+      .valueChanges()
       .subscribe(cart => {
         this.cart = cart;
       })
