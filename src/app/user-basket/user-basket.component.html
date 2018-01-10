@@ -1,6 +1,6 @@
 <h1>Shopping Cart</h1>
 
-<p>You have {{ shoppingCartItemCount }} items in your shopping cart.</p>
+    <p>You have {{ shoppingCartItemCount }} items in your shopping cart.</p>
 
 <table class="table">
     <thead>
@@ -11,8 +11,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td></td>
+        <tr><!--*ngFor="let productId of itemsInCart" -->
+            <td>{{ productId }}</td>
             <td></td>
             <td></td>
         </tr>

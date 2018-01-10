@@ -17,10 +17,8 @@ import { Subscription } from 'rxjs/Subscription';
 export class HeaderComponent implements OnInit {
 
   appUser: AppUser;
-  // cart$: ShoppingCart;
-  // cart$: Observable<ShoppingCart>;
+  cart$: Observable<ShoppingCart>;
   cart: any;
-  // count: Observable<number>;
   count: number;
 
   constructor(
@@ -32,13 +30,14 @@ export class HeaderComponent implements OnInit {
 
   async ngOnInit() {
     this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
-
-    let cart$ = await this.cartService.totalQty()
-      .then( count => {
-        count.subscribe(count => this.count = count);
-      })
-    // cart$.subscribe( count => this.count = count);
-    console.log("count: ", this.count);
+    this.cart$ = await this.cartService.getCart();
+    console.log(this.cart$);
+    // let cart$ = await this.cartService.totalQty()
+    //   .then( count => {3
+    //     count.subscribe(count => this.count = count);
+    //   })
+    // console.log("count: ", this.count);
+    // this.cart$ = await this.cartService.getCart();
   }
   
 

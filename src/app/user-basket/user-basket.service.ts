@@ -5,17 +5,15 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 
-import { AngularFireObject } from "angularfire2/database";
 import { ShoppingCart } from "app/models/shopping-cart";
-// import { AngularFirestore, 
-//     AngularFirestoreDocument, 
-//     AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFireObject, AngularFireList } from "angularfire2/database/interfaces";
+import { FirebaseObjectObservable } from "angularfire2/database-deprecated";
+
 
 @Injectable()
 export class UserBasketService implements OnInit{
 
-    constructor(private db: AngularFireDatabase,
-        ){} //private afs: AngularFirestore
+    constructor(private db: AngularFireDatabase){} 
 
     ngOnInit(){}
 
@@ -34,17 +32,15 @@ export class UserBasketService implements OnInit{
         return result.key;
     }
 
-    async getCart(): Promise<AngularFireObject<ShoppingCart>>{
+    // async getCart(): Promise<AngularFireObject<ShoppingCart>>{
+    //     let cartId = await this.getOrCreateCartId();
+    //     return this.db.object('/shopping-carts/' + cartId);
+    // }
+    async getCart():Promise<Observable<ShoppingCart>>{
         let cartId = await this.getOrCreateCartId();
-        return this.db.object('/shopping-carts/' + cartId);
-        // console.log("cart Id: ", cartId)
-        // const item: AngularFireObject<ShoppingCart> = this.db.object('/shopping-carts/' + cartId)
-        // return item
-        // .valueChanges()
-        // .map(data => {
-        //     console.log(data);
-        //     new ShoppingCart(data.items);
-        // })
+        const cart: AngularFireObject<ShoppingCart> = this.db.object('/shopping-carts/' + cartId);
+        const cartObservable: Observable<ShoppingCart> = cart.valueChanges();
+        return cartObservable.map( x => new ShoppingCart(x.items));
     }
 
     private getItem(cartId: string, productId: string){
@@ -83,18 +79,31 @@ export class UserBasketService implements OnInit{
              });
     }
 
-    async totalQty() {
-        let count: number;
-        let cart$ = await this.getCart();
-        return cart$
-        .valueChanges()
-        .map(cart => {
-            console.log("cart: ", cart)
-            count = 0;
-            for (let prodId in cart.items) 
-            count += cart.items[prodId].quantity;
-            return count;
-        });
-    }
+    // async totalQty() {
+    //     let count: number;
+    //     let cart$ = await this.getCart();
+    //     return cart$
+    //     .valueChanges()
+    //     .map(cart => {
+    //         // console.log("cart: ", cart)
+    //         count = 0;
+    //         for (let prodId in cart.items) 
+    //         count += cart.items[prodId].quantity;
+    //         return count;
+    //     });
+    // }
+
+    // async getCartItems(){
+    //     let cart$ = await this.getCart();
+    //     let items;
+    //     return cart$
+    //         .valueChanges()
+    //         .subscribe( items => {
+    //             console.log("getCartItems: ", items);
+    //             console.log("items array: ", Object.keys(items.items));
+
+    //             return Object.keys(items.items);
+    //         })
+    // }
 
 }
