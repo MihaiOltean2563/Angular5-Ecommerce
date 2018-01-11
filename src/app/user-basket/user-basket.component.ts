@@ -17,6 +17,8 @@ export class UserBasketComponent implements OnInit {
    itemsInCart;
    
   async ngOnInit() {
+    this.cart$ = await this.userBasketService.getCart();
+    //old implementation
     // this.cart$ = await this.userBasketService.totalQty().then( q => {
     //   this.shoppingCartItemCount = q;
     //   this.shoppingCartItemCount
