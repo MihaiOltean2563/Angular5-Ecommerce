@@ -18,14 +18,6 @@ export class UserBasketComponent implements OnInit {
    
   async ngOnInit() {
     this.cart$ = await this.userBasketService.getCart();
-    //old implementation
-    // this.cart$ = await this.userBasketService.totalQty().then( q => {
-    //   this.shoppingCartItemCount = q;
-    //   this.shoppingCartItemCount
-    //   .subscribe( num =>  this.shoppingCartItemCount = num)
-    // })
-
-    // this.itemsInCart = this.userBasketService.getCartItems();
   }
   
 }

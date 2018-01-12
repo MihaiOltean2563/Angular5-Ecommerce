@@ -34,6 +34,8 @@ export class ProductComponent implements OnInit {
   @Input('shopping-cart') shoppingCart;
 
   ngOnInit() {
+
+    // console.log('product', this.product)
   }
 
   openModal(template: TemplateRef<ElementRef>){
@@ -49,10 +51,11 @@ export class ProductComponent implements OnInit {
     this.cartService.removeFromCart(this.product);
   }
   
-  getQuantity(){
+  getQuantity(key){
     if(!this.shoppingCart) return 0;
+
+    let item = this.shoppingCart.itemsMap[this.product.$key];
   
-    let item = this.shoppingCart.items[this.product.$key];
     return item ? item.quantity : 0;
   }
 

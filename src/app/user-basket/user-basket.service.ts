@@ -32,15 +32,13 @@ export class UserBasketService implements OnInit{
         return result.key;
     }
 
-    // async getCart(): Promise<AngularFireObject<ShoppingCart>>{
-    //     let cartId = await this.getOrCreateCartId();
-    //     return this.db.object('/shopping-carts/' + cartId);
-    // }
     async getCart():Promise<Observable<ShoppingCart>>{
         let cartId = await this.getOrCreateCartId();
         const cart: AngularFireObject<ShoppingCart> = this.db.object('/shopping-carts/' + cartId);
         const cartObservable: Observable<ShoppingCart> = cart.valueChanges();
-        return cartObservable.map( x => new ShoppingCart(x.items));
+        return cartObservable.map( (x:any) => {
+            return new ShoppingCart(x.items);
+        });
     }
 
     private getItem(cartId: string, productId: string){

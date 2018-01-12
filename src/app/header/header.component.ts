@@ -31,13 +31,7 @@ export class HeaderComponent implements OnInit {
   async ngOnInit() {
     this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
     this.cart$ = await this.cartService.getCart();
-    console.log(this.cart$);
-    // let cart$ = await this.cartService.totalQty()
-    //   .then( count => {3
-    //     count.subscribe(count => this.count = count);
-    //   })
-    // console.log("count: ", this.count);
-    // this.cart$ = await this.cartService.getCart();
+    // console.log(this.cart$);
   }
   
 
