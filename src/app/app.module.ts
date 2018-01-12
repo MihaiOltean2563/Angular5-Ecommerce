@@ -71,6 +71,7 @@ import { AdminAuthGuard } from 'app/auth/admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { CategoryService } from './shared/category.service';
 import { ProductFilterComponent } from './products/product-list/product-filter/product-filter.component';
+import { ProductQuantityComponent } from './products/product-quantity/product-quantity.component';
 
 
 
@@ -95,7 +96,8 @@ import { ProductFilterComponent } from './products/product-list/product-filter/p
     AdminOrdersComponent,
     LoginComponent,
     ProductFormComponent,
-    ProductFilterComponent
+    ProductFilterComponent,
+    ProductQuantityComponent
   ],
   imports: [
     DataTableModule,

@@ -1,7 +1,9 @@
 import { ShoppingCartItem } from "app/models/shopping-cart-item";
+import { Product } from "app/models/product";
 
 export class ShoppingCart {
-    //The itemsMap we pass to this constructor is not an array, but an object of type AngularFireObject(angularfire2 v5+);
+    //The itemsMap we pass to this constructor is not an array, but a node reference 
+    //of type AngularFireObject(angularfire2 v5+);
     constructor(public itemsMap: {[productId: string]: ShoppingCartItem}) { 
         for(let productId in itemsMap){
             let item = itemsMap[productId];
@@ -31,6 +33,12 @@ export class ShoppingCart {
             sum += this.items[productId].totalPrice;
         }
         return sum;
+    }
+
+    getQuantity(product: Product){
+        console.log("product", product);
+        let item = this.itemsMap[product.$key];
+        return item ? item.quantity : 0;
     }
 
 }

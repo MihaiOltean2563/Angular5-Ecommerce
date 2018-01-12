@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Product } from 'app/products/product.model';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
 import { Observable } from 'rxjs/Observable';
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 export class UserBasketComponent implements OnInit {
 
   constructor(private userBasketService: UserBasketService) { }
-  
+
    cart$;
    shoppingCartItemCount: Observable<any>;
    itemsInCart;

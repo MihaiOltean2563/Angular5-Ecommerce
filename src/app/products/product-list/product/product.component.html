@@ -12,7 +12,7 @@
       <p class="card-text">{{product.price | currency: 'USD'}}</p>
     </div>
 
-    <div class="card-footer" *ngIf="showActions">
+    <div class="card-footer" *ngIf="showActions && shoppingCart">
        <div class="row no-gutters">
          <div class="col-2">
           <a (click)="openModal(template)"
@@ -24,20 +24,15 @@
          <div class="col">
             <button (click)="addToCart()"
             class="btn btn-success btn-block"
-            *ngIf="getQuantity(product.$key) == 0; else updateQuantity">
+            *ngIf="shoppingCart.getQuantity(product) == 0; else updateQuantity">
             Add to cart <i class="fa fa-cart-plus" aria-hidden="true"></i>
             </button>
 
             <ng-template #updateQuantity>
-              <div class="row no-gutters text-center">
-                <div class="col-3">
-                  <button class="btn btn-secondary btn-block" (click)="removeFromCart()">-</button>
-                </div>
-                <div class="col align-self-center"> {{ getQuantity() }} in cart</div>
-                <div class="col-3">
-                  <button class="btn btn-secondary btn-block shift-right" (click)="addToCart()">+</button>
-                </div>
-              </div>
+              <app-product-quantity 
+              [product]="product" 
+              [shopping-cart]="shoppingCart">
+              </app-product-quantity>
             </ng-template>
          </div>
          <div class="col-2">

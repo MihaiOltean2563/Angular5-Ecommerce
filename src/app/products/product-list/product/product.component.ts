@@ -13,6 +13,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Routes, RouterModule, Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
+import { ShoppingCart } from 'app/models/shopping-cart';
 
 
 @Component({
@@ -31,10 +32,9 @@ export class ProductComponent implements OnInit {
   modalRef: BsModalRef;
   @Input('product') product: Product;
   @Input('show-actions') showActions = true;
-  @Input('shopping-cart') shoppingCart;
+  @Input('shopping-cart') shoppingCart: ShoppingCart;
 
   ngOnInit() {
-
     // console.log('product', this.product)
   }
 
@@ -47,16 +47,5 @@ export class ProductComponent implements OnInit {
     // console.log("Added to Cart: ", this.product);
   }
 
-  removeFromCart(){
-    this.cartService.removeFromCart(this.product);
-  }
-  
-  getQuantity(key){
-    if(!this.shoppingCart) return 0;
-
-    let item = this.shoppingCart.itemsMap[this.product.$key];
-  
-    return item ? item.quantity : 0;
-  }
 
 }
