@@ -2,9 +2,10 @@ import { ShoppingCartItem } from "app/models/shopping-cart-item";
 import { Product } from "app/models/product";
 
 export class ShoppingCart {
-    //The itemsMap we pass to this constructor is not an array, but a node reference 
-    //of type AngularFireObject(angularfire2 v5+);
-    constructor(public itemsMap: {[productId: string]: ShoppingCartItem}) { 
+
+    //The itemsMap we pass to this constructor is not an array, but an object of type AngularFireObject(angularfire2 v5+);
+    constructor(public itemsMap: {[productId: string]: ShoppingCartItem}) {
+        // console.log("itemsMap: ", itemsMap)
         for(let productId in itemsMap){
             let item = itemsMap[productId];
             this.items.push(new ShoppingCartItem(item.product, item.quantity));
@@ -23,7 +24,6 @@ export class ShoppingCart {
         let total = objArray.reduce(function(a, b){
             return a + b.quantity;
         }, 0);
-        
         return total;
     }
 
@@ -36,7 +36,6 @@ export class ShoppingCart {
     }
 
     getQuantity(product: Product){
-        console.log("product", product);
         let item = this.itemsMap[product.$key];
         return item ? item.quantity : 0;
     }

@@ -1,6 +1,6 @@
 import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Response} from '@angular/http';
-import { Product } from 'app/products/product.model';
+import { Product } from 'app/models/product';
 import { Subject } from 'rxjs/Subject';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
 import { AngularFireDatabase,  } from 'angularfire2/database';
