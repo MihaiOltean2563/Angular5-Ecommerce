@@ -7,101 +7,104 @@ import 'rxjs/add/operator/map';
 
 import { ShoppingCart } from "app/models/shopping-cart";
 import { AngularFireObject, AngularFireList } from "angularfire2/database/interfaces";
-import { FirebaseObjectObservable } from "angularfire2/database-deprecated";
+import { AngularFirestoreDocument, AngularFirestore, AngularFirestoreCollection } from "angularfire2/firestore";
+import { ShoppingCartItem } from "app/models/shopping-cart-item";
 
 
 @Injectable()
 export class UserBasketService implements OnInit{
 
-    constructor(private db: AngularFireDatabase){} 
+    constructor(private db: AngularFireDatabase,
+                private afs: AngularFirestore){} 
 
     ngOnInit(){}
 
     private create(){
-        return this.db.list('/shopping-carts').push({
-            dataCreated: new Date().getTime()
-        });
+        return this.afs.collection('shopping-carts').add({
+            dateCreated: new Date().getTime()
+        })
     }
 
     private async getOrCreateCartId(): Promise<string>{
         let cartId = localStorage.getItem('cartId');
         if(cartId) return cartId;
         let result = await this.create();
-        localStorage.setItem('cartId', result.key);
-        console.log("cart id returned: ", result);
-        return result.key;
+        localStorage.setItem('cartId', result.id);
+        return result.id;
     }
 
     async getCart():Promise<Observable<ShoppingCart>>{
+        // let cartId = await this.getOrCreateCartId();
+        // const cart: AngularFireObject<ShoppingCart> = this.db.object('/shopping-carts/' + cartId);
+        // const cartObservable: Observable<ShoppingCart> = cart.valueChanges();
+        // return cartObservable.map( (x:any) => {
+        //     return new ShoppingCart(x.items);
+        // });
         let cartId = await this.getOrCreateCartId();
-        const cart: AngularFireObject<ShoppingCart> = this.db.object('/shopping-carts/' + cartId);
-        const cartObservable: Observable<ShoppingCart> = cart.valueChanges();
-        return cartObservable.map( (x:any) => {
-            return new ShoppingCart(x.items);
-        });
+        let cart: AngularFirestoreCollection<any> = this.afs.collection('shopping-carts' + cartId);
+        let cartObservable: Observable<any> = cart.valueChanges();
+        return cartObservable.map( x => new ShoppingCart(x.items));
+
     }
 
-    private getItem(cartId: string, productId: string){
-        return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
+    private async getItem(productId){
+        let cartId = await this.getOrCreateCartId();
+        const document: AngularFirestoreDocument<ShoppingCartItem> = 
+            this.afs.collection('shopping-carts').doc(cartId).collection('items').doc(productId)
+        const document$: Observable<ShoppingCartItem> = document.valueChanges();
+        console.log("returned by getItem: ",document$);
+        return document$ || new Observable<ShoppingCartItem>();
     }
 
     async addToCart(product: Product){
-       this.updateItemQuantity(product, 1);
+        this.updateItem(product, 1);
     }
 
     async removeFromCart(product: Product){
-        this.updateItemQuantity(product, -1);
+        this.updateItem(product, -1);
     }
 
-    private async updateItemQuantity(product: Product, change: number){
+    private async updateItem(product: Product, change: number){
         let cartId = await this.getOrCreateCartId();
+        let item$ = await this.getItem(product.title);
+        let itemRef = this.afs.collection('shopping-carts').doc(cartId).collection('items').doc(product.title);
         
-        let item$ = this.getItem(cartId, product.$key);
-        
-        item$.snapshotChanges()
-             .take(1)
-             .subscribe(item => {
-                 if(item.payload.exists()){
-                     item$.update({ quantity: item.payload.val().quantity + change})
-                 }else{
-                     item$.update({
-                         product: {
-                            title: product.title,
-                            price: product.price,
-                            category: product.category,
-                            imageUrl: product.imageUrl,
-                          },
-                         quantity: 1
-                     })
-                 }
-             });
+        item$
+        .take(1)
+        .subscribe( item => {
+            if(!itemRef.ref.get()){
+                console.log('tge')
+                // itemRef.update({
+                //     title: product.title,
+                //     price: product.price,
+                //     category: product.category,
+                //     imageUrl: product.imageUrl,
+                //     quantity:  0 + change
+                // })
+            } 
+            console.log("itemRef:", itemRef);
+                itemRef.ref.get().then(function(doc) {
+                    
+                    if (doc.exists) {
+                        itemRef.update({ quantity: (item.quantity || 0) + change})
+                    } else {
+                        //this still doesn't work
+                        // let quantity = item.quantity ? item.quantity : 0;
+                        // itemRef.update({
+                        //         title: product.title,
+                        //         price: product.price,
+                        //         category: product.category,
+                        //         imageUrl: product.imageUrl,
+                        //         // quantity: (item.quantity || 0) + change
+                        //         quantity: quantity + change
+                        // })
+                        console.log("doesnt exist");
+                       
+                    }
+                }).catch(function(error) {
+                    console.log("Error getting document:", error);
+                });
+
+        })
     }
-
-    // async totalQty() {
-    //     let count: number;
-    //     let cart$ = await this.getCart();
-    //     return cart$
-    //     .valueChanges()
-    //     .map(cart => {
-    //         // console.log("cart: ", cart)
-    //         count = 0;
-    //         for (let prodId in cart.items) 
-    //         count += cart.items[prodId].quantity;
-    //         return count;
-    //     });
-    // }
-
-    // async getCartItems(){
-    //     let cart$ = await this.getCart();
-    //     let items;
-    //     return cart$
-    //         .valueChanges()
-    //         .subscribe( items => {
-    //             console.log("getCartItems: ", items);
-    //             console.log("items array: ", Object.keys(items.items));
-
-    //             return Object.keys(items.items);
-    //         })
-    // }
-
 }

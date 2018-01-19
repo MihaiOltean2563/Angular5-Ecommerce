@@ -46,6 +46,9 @@ export class ProductComponent implements OnInit {
     this.cartService.addToCart(this.product);
     // console.log("Added to Cart: ", this.product);
   }
-
+  
+  removeFromCart(){
+    this.cartService.removeFromCart(this.product);
+  }
 
 }

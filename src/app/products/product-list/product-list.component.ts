@@ -31,26 +31,25 @@ export class ProductListComponent implements OnInit, OnDestroy {
               private shoppingCartService: UserBasketService) {
 
                 productService.getAll()
-                  .switchMap(products => {
-                    this.products = products;
-                    return route.queryParamMap;
-                  })
+                .switchMap(products => {
+                      this.products = products;
+                      return route.queryParamMap;
+                })
 
-                  .subscribe(params => {
-                    this.category = params.get('category');
-  
-                    this.filteredProducts = (this.category) ? 
-                      this.products.filter( p => p.category === this.category) :
-                      this.products;
-                  });
+                .subscribe(data => {
+                  this.category = data.get('category');
+                  // console.log("categ", this.category);
 
-                
+                  this.filteredProducts =  (this.category) ? 
+                        this.products.filter( p => p.category === this.category.toLowerCase()) : 
+                        this.products;
+                });
+
               }
     
 
   async ngOnInit() {
      this.subscription = (await this.shoppingCartService.getCart())
-      // .valueChanges()
       .subscribe(cart => {
         this.cart = cart;
       })

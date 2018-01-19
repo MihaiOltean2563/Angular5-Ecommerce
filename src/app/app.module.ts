@@ -108,6 +108,7 @@ import { ProductQuantityComponent } from './products/product-quantity/product-qu
     CommonModule,
     AppRoutingModule,
     ModalModule.forRoot(),
+    AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

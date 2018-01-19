@@ -8,20 +8,8 @@ import { ProductService } from 'app/products/products.service';
   styleUrls: ['./products.component.css'],
   providers: [ProductService]
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent{
 
-  constructor(private productService: ProductService) { }
-  
-  selectedProduct: Product;
+  constructor() { }
 
-  ngOnInit() {
-    this.productService.selectedProduct
-       .subscribe(
-         (product: Product) => {
-           this.selectedProduct = product;
-           console.log("selectedProduct", this.selectedProduct)
-         }
-       )
-  }
-  
 }

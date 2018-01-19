@@ -6,7 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireObject, AngularFireList } from 'angularfire2/database/interfaces';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { FirebaseListObservable } from 'angularfire2/database-deprecated';
-import { AfterViewChecked } from '@angular/core/src/metadata/lifecycle_hooks';
 
 
 @Component({
@@ -14,7 +13,7 @@ import { AfterViewChecked } from '@angular/core/src/metadata/lifecycle_hooks';
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
-export class ProductDetailComponent implements OnInit, AfterViewChecked {
+export class ProductDetailComponent implements OnInit {
   product = {};
   id;
 
@@ -26,10 +25,9 @@ export class ProductDetailComponent implements OnInit, AfterViewChecked {
                 if(this.id) {
                 this.productService
                   .get(this.id)
-                  .valueChanges()
                   .take(1)
                   .subscribe( p => this.product = p)
-                  // console.log("Product loaded in product detail page: ", this.product);
+                  console.log("product in detail:", this.product);
                 }
               }
 
@@ -37,8 +35,6 @@ export class ProductDetailComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
   }
-  ngAfterViewChecked() { 
-    // console.log("Product loaded in product detail page: after view checked", this.product);
-  }
+
 
 }

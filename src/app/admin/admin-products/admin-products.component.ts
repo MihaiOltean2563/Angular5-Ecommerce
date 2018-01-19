@@ -17,17 +17,17 @@ import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
 export class AdminProductsComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
-  products : Product[];
+  products : Product[]= [];
   tableResource: DataTableResource<Product>;
   items: Product[] = [];
   itemCount: number;
 
   constructor(private productService: ProductService) {
     this.subscription =  
-    this.productService.getAll()
+    
+    productService.getAll()
     .subscribe(products => {
       this.products = products;
-      console.log(this.products);
       this.initializeTable(products);
     });
   }
