@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Http, Response } from "@angular/http";
 import { ProductService } from "app/products/products.service";
-import { Product } from "app/products/product.model";
+// import { Product } from "app/products/product.model";
 
 @Injectable()
 export class DataStorageService {
