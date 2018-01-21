@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Product } from 'app/models/product';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
 import { Observable } from 'rxjs/Observable';
+import { CartService } from 'app/user-basket/cart-service';
+import { ShoppingCartItem } from 'app/models/shopping-cart-item';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-user-basket',
@@ -10,14 +13,20 @@ import { Observable } from 'rxjs/Observable';
 })
 export class UserBasketComponent implements OnInit {
 
-  constructor(private userBasketService: UserBasketService) { }
+  itemsCollectionRef: AngularFirestoreCollection<ShoppingCartItem>;
+  items$: Observable<ShoppingCartItem[]>;
+
+  constructor(private cartService: CartService,
+              private afs: AngularFirestore) {
+   }
 
    cart$;
    shoppingCartItemCount: Observable<any>;
    itemsInCart;
    
   async ngOnInit() {
-    this.cart$ = await this.userBasketService.getCart();
+    // this.cart$ = await this.userBasketService.getCart();
+
   }
   
 }

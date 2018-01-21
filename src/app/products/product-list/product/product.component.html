@@ -10,6 +10,17 @@
       <h5 class="card-title">{{product.title}}</h5>
       <h6 class="card-subtitle mb-2 text-muted">{{product.category}}</h6>
       <p class="card-text">{{product.price | currency: 'USD'}}</p>
+       <!-- temporary buttons -->
+       <div class="row no-gutters text-center">
+        <div class="col-3">
+          <button class="btn btn-secondary btn-block" (click)="removeFromCart()">-</button>
+        </div>
+        <div class="col align-self-center">  in cart</div>
+        <div class="col-3">
+          <button class="btn btn-secondary btn-block shift-right" (click)="addToCart()">+</button>
+        </div>
+      </div>
+      <!-- temporary buttons -->
     </div>
 
     <div class="card-footer" *ngIf="showActions && shoppingCart">

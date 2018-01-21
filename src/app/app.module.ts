@@ -45,6 +45,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from './products/products.service';
 import { DataStorageService } from './shared/data-storage.service';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
+import { CartService } from 'app/user-basket/cart-service';
 
 //Ngx-Bootstrap
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -110,6 +111,7 @@ import { ProductQuantityComponent } from './products/product-quantity/product-qu
     ModalModule.forRoot(),
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule.enablePersistence(),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule.forRoot(),
@@ -120,6 +122,7 @@ import { ProductQuantityComponent } from './products/product-quantity/product-qu
     ProductService, 
     DataStorageService, 
     UserBasketService,
+    CartService,
     AuthService,
     AuthGuard,
     UserService,

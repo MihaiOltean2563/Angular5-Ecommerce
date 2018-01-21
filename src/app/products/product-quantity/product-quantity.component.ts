@@ -9,16 +9,21 @@ import { Product } from 'app/models/product';
 })
 export class ProductQuantityComponent{
 
-  constructor(private cartService: UserBasketService) { }
+  constructor(private cartService: UserBasketService) {
+    console.log(this.product);
+   }
   
   @Input('product') product: Product;
   @Input('shopping-cart') shoppingCart;
 
   addToCart(){
+    console.log("prod from btns comp: +", this.product);
     this.cartService.addToCart(this.product);
   }
 
   removeFromCart(){
+    console.log("prod from btns comp: -", this.product);
+
     this.cartService.removeFromCart(this.product);
   }
   
