@@ -1,5 +1,12 @@
 <h1>Shopping Cart</h1>
 
+<ul>
+    <li *ngFor="let item of items$ | async">
+        <td>{{ item | json }}</td>
+    </li>
+</ul>
+
+
 <ng-container *ngIf="cart$ | async as cart">
     <p>You have {{ cart.totalItemsCount }} items in your shopping cart.</p>
 
@@ -12,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of cart.items">
+            <!-- <tr *ngFor="let item of cart.items">
                 <td>{{ item.product.title }}</td>
                 <td>
                     <app-product-quantity 
@@ -21,7 +28,8 @@
                     </app-product-quantity>
                 </td>
                 <td>{{ item.totalPrice | currency: 'USD'}}</td>
-            </tr>
+            </tr> -->
+            
         </tbody>
         <tfoot>
             <tr>
