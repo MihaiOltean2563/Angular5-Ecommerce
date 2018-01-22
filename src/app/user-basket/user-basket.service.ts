@@ -20,12 +20,17 @@ export class UserBasketService implements OnInit{
     ngOnInit(){}
 
     private create(){
-        return this.afs.collection('shopping-carts').add({
+        return this.afs.collection('carts').add({
             dateCreated: new Date().getTime()
         })
     }
 
-    private async getOrCreateCartId(): Promise<string>{
+    private getCart(cartId: string){
+        console.log("getCart returns: ", this.afs.collection('carts').doc(cartId))
+        return this.afs.collection('carts').doc(cartId);
+    }
+
+    private async getOrCreateCartId(){
         let cartId = localStorage.getItem('cartId');
         if(cartId) return cartId;
         let result = await this.create();
@@ -37,27 +42,25 @@ export class UserBasketService implements OnInit{
     //     let cartId = await this.getOrCreateCartId();
     //     return this.db.object('/shopping-carts/' + cartId);
     // }
-    async getCart():Promise<Observable<ShoppingCart>>{
-        // let cartId = await this.getOrCreateCartId();
-        // const cart: AngularFireObject<ShoppingCart> = this.db.object('/shopping-carts/' + cartId);
-        // const cartObservable: Observable<ShoppingCart> = cart.valueChanges();
-        // return cartObservable.map( (x:any) => {
-        //     return new ShoppingCart(x.items);
-        // });
-        let cartId = await this.getOrCreateCartId();
-        let cart: AngularFirestoreCollection<any> = this.afs.collection('shopping-carts' + cartId);
-        let cartObservable: Observable<any> = cart.valueChanges();
-        return cartObservable.map( x => new ShoppingCart(x.items));
+    // async getCart():Promise<Observable<ShoppingCart>>{
+    //     // let cartId = await this.getOrCreateCartId();
+    //     // const cart: AngularFireObject<ShoppingCart> = this.db.object('/shopping-carts/' + cartId);
+    //     // const cartObservable: Observable<ShoppingCart> = cart.valueChanges();
+    //     // return cartObservable.map( (x:any) => {
+    //     //     return new ShoppingCart(x.items);
+    //     // });
+    //     let cartId = await this.getOrCreateCartId();
+    //     let cart: AngularFirestoreCollection<any> = this.afs.collection('carts' + cartId);
+    //     let cartObservable: Observable<any> = cart.valueChanges();
+    //     return cartObservable.map( x => new ShoppingCart(x.items));
 
-    }
+    // }
 
     private async getItem(productId){
         let cartId = await this.getOrCreateCartId();
-        const document: AngularFirestoreDocument<ShoppingCartItem> = 
-            this.afs.collection('shopping-carts').doc(cartId).collection('items').doc(productId)
+        const document: AngularFirestoreDocument<ShoppingCartItem> =  this.afs.collection('carts').doc(cartId).collection('items').doc(productId)
         const document$: Observable<ShoppingCartItem> = document.valueChanges();
-        console.log("returned by getItem: ",document$);
-        return document$ || new Observable<ShoppingCartItem>();
+        return document$;
     }
 
     async addToCart(product: Product){
@@ -70,45 +73,23 @@ export class UserBasketService implements OnInit{
 
     private async updateItem(product: Product, change: number){
         let cartId = await this.getOrCreateCartId();
-        let item$ = await this.getItem(product.title);
-        let itemRef = this.afs.collection('shopping-carts').doc(cartId).collection('items').doc(product.title);
-        
-        item$
-        .take(1)
-        .subscribe( item => {
-            if(!itemRef.ref.get()){
-                console.log('tge')
-                // itemRef.update({
-                //     title: product.title,
-                //     price: product.price,
-                //     category: product.category,
-                //     imageUrl: product.imageUrl,
-                //     quantity:  0 + change
-                // })
-            } 
-            console.log("itemRef:", itemRef);
-                itemRef.ref.get().then(function(doc) {
-                    
-                    if (doc.exists) {
-                        itemRef.update({ quantity: (item.quantity || 0) + change})
-                    } else {
-                        //this still doesn't work
-                        // let quantity = item.quantity ? item.quantity : 0;
-                        // itemRef.update({
-                        //         title: product.title,
-                        //         price: product.price,
-                        //         category: product.category,
-                        //         imageUrl: product.imageUrl,
-                        //         // quantity: (item.quantity || 0) + change
-                        //         quantity: quantity + change
-                        // })
-                        console.log("doesnt exist");
-                       
-                    }
-                }).catch(function(error) {
-                    console.log("Error getting document:", error);
+        let itemRef = this.afs.collection('carts').doc(cartId).collection('items').doc(product.title);
+        itemRef.ref.get().then(function(doc) {
+            if (doc.exists) {
+                console.log("Updating:", doc.data());
+                itemRef.update({ quantity: (doc.data().quantity || 0) + change})
+            } else {
+                console.log("Creating...");
+                itemRef.set({
+                    title: product.title,
+                    category: product.category,
+                    imageUrl: product.imageUrl,
+                    price: product.price,
+                    quantity: 1
                 });
-
-        })
+            }
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
     }
 }
