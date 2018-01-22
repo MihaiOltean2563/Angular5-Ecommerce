@@ -1,14 +1,14 @@
 <h1>Shopping Cart</h1>
 
 <ul>
-    <li *ngFor="let item of items$ | async">
+    <li *ngFor="let item of itemsInCart | async">
         <td>{{ item | json }}</td>
     </li>
 </ul>
 
 
 <ng-container *ngIf="cart$ | async as cart">
-    <p>You have {{ cart.totalItemsCount }} items in your shopping cart.</p>
+    <!-- <p>You have {{ cart.totalItemsCount }} items in your shopping cart.</p> -->
 
     <table class="table">
         <thead>
