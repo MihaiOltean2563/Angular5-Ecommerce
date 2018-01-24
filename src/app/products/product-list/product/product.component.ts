@@ -14,7 +14,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Routes, RouterModule, Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import { ShoppingCart } from 'app/models/shopping-cart';
-import { CartService } from 'app/user-basket/cart-service';
+import { Subscription } from 'rxjs/Subscription';
 
 
 @Component({
@@ -27,16 +27,31 @@ export class ProductComponent implements OnInit {
   constructor(private productService: ProductService,
               private cartService: UserBasketService,
               private modalService: BsModalService,
-              private router: Router
-              ) {} //private cartService: CartService
+              private router: Router) {}
 
               
   modalRef: BsModalRef;
+  cart: Observable<ShoppingCart>;
+  subscription: Subscription;
+  itemInCart;
+  itemQ: number;
+
   @Input('product') product: Product;
   @Input('show-actions') showActions = true;
   @Input('shopping-cart') shoppingCart: ShoppingCart;
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.itemInCart = await this.cartService.getItem(this.product.title);
+    
+    let subscription = this.itemInCart
+   
+    .subscribe( item => {
+      if(item){
+        this.itemQ = item.quantity;
+      }else{
+        this.itemQ =  0;
+      }
+    })
   }
 
   openModal(template: TemplateRef<ElementRef>){
@@ -51,7 +66,6 @@ export class ProductComponent implements OnInit {
   removeFromCart(){
     this.cartService.removeFromCart(this.product);
     console.log("Removed from Cart: ", this.product);
-
   }
 
 }

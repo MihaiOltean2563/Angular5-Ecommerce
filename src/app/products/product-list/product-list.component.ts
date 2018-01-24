@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
 import { Subscription } from 'rxjs/Subscription';
+import { ShoppingCart } from 'app/models/shopping-cart';
 
 @Component({
   selector: 'app-product-list',
@@ -22,7 +23,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   category:string;
   filteredProducts: Product[] = [];
-  cart: any;
+  cart: ShoppingCart;
   subscription: Subscription;
 
   constructor(private dataStorageService: DataStorageService,
@@ -38,7 +39,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
                 .subscribe(data => {
                   this.category = data.get('category');
-                  // console.log("categ", this.category);
 
                   this.filteredProducts =  (this.category) ? 
                         this.products.filter( p => p.category === this.category.toLowerCase()) : 
@@ -49,10 +49,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
     
 
   async ngOnInit() {
-    //  this.subscription = (await this.shoppingCartService.getCart())
-    //   .subscribe(cart => {
-    //     this.cart = cart;
-    //   })
+     this.subscription = (await this.shoppingCartService.getCart())
+      .subscribe(cart => {
+        this.cart = cart;
+        console.log("cart in prod list: ", this.cart)
+      })
   }
   
   ngOnDestroy(){

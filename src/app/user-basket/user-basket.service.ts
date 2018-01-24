@@ -16,8 +16,7 @@ export class UserBasketService implements OnInit{
 
     readonly path = 'items';
 
-    constructor(private db: AngularFireDatabase,
-                private afs: AngularFirestore){} 
+    constructor(private afs: AngularFirestore){} 
 
     ngOnInit(){}
 
@@ -40,37 +39,16 @@ export class UserBasketService implements OnInit{
         return result.id;
     }
     // getCart method type = Promise<Observable<ShoppingCart>>
-    async getCart(){
+    async getCart():Promise<Observable<ShoppingCart>>{
         let cartId = await this.getOrCreateCartId();
-        let cartRef: AngularFirestoreDocument<ShoppingCart> = this.afs.collection('carts').doc(cartId);
-        let cartObservable: Observable<ShoppingCart> = cartRef.valueChanges();
-        // return cartObservable.map( x => {
-        //     let items: AngularFirestoreCollection<ShoppingCartItem[]> = 
-        //     this.afs.collection('carts').doc(cartId).collection('items');
-        //     let itemsObservable = items.valueChanges();
-        //     new ShoppingCart(itemsObservable);
-        // })
-        // return cartObservable.map( x => new ShoppingCart(x.items));
+
         let items: AngularFirestoreCollection<ShoppingCartItem[]> = 
         this.afs.collection('carts').doc(cartId).collection('items');
         let itemsObservable = items.valueChanges();
-        return itemsObservable.map(x => new ShoppingCart(x))
+        return itemsObservable.map(x => new ShoppingCart(x));
     }
-    // async getCart():Promise<Observable<ShoppingCart>>{
-    //     // let cartId = await this.getOrCreateCartId();
-    //     // const cart: AngularFireObject<ShoppingCart> = this.db.object('/shopping-carts/' + cartId);
-    //     // const cartObservable: Observable<ShoppingCart> = cart.valueChanges();
-    //     // return cartObservable.map( (x:any) => {
-    //     //     return new ShoppingCart(x.items);
-    //     // });
-    //     let cartId = await this.getOrCreateCartId();
-    //     let cart: AngularFirestoreCollection<any> = this.afs.collection('carts' + cartId);
-    //     let cartObservable: Observable<any> = cart.valueChanges();
-    //     return cartObservable.map( x => new ShoppingCart(x.items));
-
-    // }
-
-    private async getItem(productId){
+   
+     async getItem(productId){
         let cartId = await this.getOrCreateCartId();
         const document: AngularFirestoreDocument<ShoppingCartItem> =  this.afs.collection('carts').doc(cartId).collection('items').doc(productId)
         const document$: Observable<ShoppingCartItem> = document.valueChanges();

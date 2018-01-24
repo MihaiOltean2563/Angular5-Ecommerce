@@ -5,27 +5,24 @@ export class ShoppingCart {
     
     
     constructor(public itemsInCart) {
-        console.log("itemsInCart: ",itemsInCart)
-        // for(let productId in itemsInCart){
-        //     let item = itemsInCart[productId];
-        //     this.items.push(new ShoppingCartItem());
-        // }
+        // console.log("itemsInCart: ",itemsInCart)
+        this.items = itemsInCart;
     }
     
     items: ShoppingCartItem[] = [];
 
-    // get totalItemsCount(){
-    //     let count = 0;
-    //     const objArray = [];
-    //     let values:Array<any> = Object.keys(this.itemsMap)
-    //     .map( key => this.itemsMap[key])
-    //     .map( x => objArray.push(x))
+    get totalItemsCount(){
+        let count = 0;
+        const objArray = [];
+        let values:Array<any> = Object.keys(this.items)
+        .map( key => this.items[key])
+        .map( x => objArray.push(x))
         
-    //     let total = objArray.reduce(function(a, b){
-    //         return a + b.quantity;
-    //     }, 0);
-    //     return total;
-    // }
+        let total = objArray.reduce(function(a, b){
+            return a + b.quantity;
+        }, 0);
+        return total;
+    }
     
 
     get totalPrice(){
@@ -36,9 +33,11 @@ export class ShoppingCart {
         return sum;
     }
 
-    // getQuantity(product: Product){
-    //     let item = this.itemsMap[product.$key];
-    //     return item ? item.quantity : 0;
-    // }
+    getQuantity(product: Product){
+        // let item = this.itemsMap[product.$key];
+        // return item ? item.quantity : 0;
+        // console.log('getQ', product)
+        return this.itemsInCart.map( item => item.title == product.title ? item.quantity : 0);
+    }
 
 }
