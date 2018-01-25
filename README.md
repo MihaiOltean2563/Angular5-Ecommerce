@@ -1,4 +1,4 @@
-# Angular2Ecommerce
+# Angular5Ecommerce
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.3.
 
