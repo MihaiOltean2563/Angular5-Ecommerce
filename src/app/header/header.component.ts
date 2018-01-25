@@ -18,8 +18,6 @@ export class HeaderComponent implements OnInit {
 
   appUser: AppUser;
   cart$: Observable<ShoppingCart>;
-  cart: any;
-  count: number;
 
   constructor(
     private dataStorageService: DataStorageService,
@@ -30,8 +28,7 @@ export class HeaderComponent implements OnInit {
 
   async ngOnInit() {
     this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
-    // this.cart$ = await this.cartService.getCart();
-    // console.log(this.cart$);
+    this.cart$ = await this.cartService.getCart();
   }
   
 
