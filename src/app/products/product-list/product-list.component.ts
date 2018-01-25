@@ -52,12 +52,11 @@ export class ProductListComponent implements OnInit, OnDestroy {
      this.subscription = (await this.shoppingCartService.getCart())
       .subscribe(cart => {
         this.cart = cart;
-        console.log("cart in prod list: ", this.cart)
       })
   }
   
   ngOnDestroy(){
-    // this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
 

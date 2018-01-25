@@ -33,12 +33,12 @@ export class ProductQuantityComponent implements OnInit{
   
 
   addToCart(){
-    console.log("prod from btns comp: +", this.product);
+    // console.log("prod from btns comp: +", this.product);
     this.cartService.addToCart(this.product);
   }
 
   removeFromCart(){
-    console.log("prod from btns comp: -", this.product);
+    // console.log("prod from btns comp: -", this.product);
 
     this.cartService.removeFromCart(this.product);
   }
