@@ -19,7 +19,7 @@ export class ProductQuantityComponent implements OnInit{
 
   async ngOnInit(){
     this.itemInCart = await this.cartService.getItem(this.product.title);
-    
+
     let subscription = this.itemInCart
    
     .subscribe( item => {

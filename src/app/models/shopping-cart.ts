@@ -27,8 +27,8 @@ export class ShoppingCart {
 
     get totalPrice(){
         let sum = 0;
-        for( let productId in this.items){
-            // sum += this.items[productId].totalPrice;
+        for(let prod in this.items){
+            sum += this.items[prod].price;
         }
         return sum;
     }
@@ -37,7 +37,7 @@ export class ShoppingCart {
         // let item = this.itemsMap[product.$key];
         // return item ? item.quantity : 0;
         // console.log('getQ', product)
-        return this.itemsInCart.map( item => item.title == product.title ? item.quantity : 0);
+        // return this.itemsInCart.map( item => item.title == product.title ? item.quantity : 0);
     }
 
 }

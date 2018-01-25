@@ -13,17 +13,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of cart.items">
-                <!-- <td>{{ item.product.title }}</td> -->
+            <tr *ngFor="let item of cart.itemsInCart">
+                <td>{{ item.title }}</td>
                 <td>
-                    <!-- <app-product-quantity 
-                    [product]="item.product" 
-                    [shopping-cart]="cart">
-                    </app-product-quantity> -->
+                    <app-product-quantity 
+                    [product]="item">
+                    </app-product-quantity>
                 </td>
-                <!-- <td>{{ item.totalPrice | currency: 'USD'}}</td> -->
-            </tr>
-            
+                <td>{{ item.price | currency: 'USD'}}</td>
+            </tr>     
         </tbody>
         <tfoot>
             <tr>

@@ -4,7 +4,9 @@
 .card-footer{
     padding:0;
 }
-
+button{
+    border-radius:0;
+}
 a{
     border-radius:0;
 }
