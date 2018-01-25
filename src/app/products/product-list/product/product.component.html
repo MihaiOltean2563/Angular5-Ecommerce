@@ -11,8 +11,8 @@
       <h6 class="card-subtitle mb-2 text-muted">{{product.category}}</h6>
       <p class="card-text">{{product.price | currency: 'USD'}}</p>
     </div>
-    <div class="card-footer">
-        <!-- temporary buttons -->
+    <!-- temporary buttons -->
+    <!-- <div class="card-footer">
         <div class="row no-gutters text-center">
           <div class="col-3">
             <button class="btn btn-secondary btn-block" (click)="removeFromCart()">-</button>
@@ -22,8 +22,8 @@
             <button class="btn btn-secondary btn-block shift-right" (click)="addToCart()">+</button>
           </div>
         </div>
-        <!-- temporary buttons -->
-    </div>
+    </div> -->
+    <!-- temporary buttons -->
     <div class="card-footer" *ngIf="showActions && shoppingCart">
        <div class="row no-gutters">
          <div class="col-2">
@@ -36,16 +36,15 @@
          <div class="col">
             <button (click)="addToCart()"
             class="btn btn-success btn-block"
-            > <!--*ngIf="shoppingCart.getQuantity(product) == 0; else updateQuantity"-->
+            *ngIf="itemQ == 0; else updateQuantity">
             Add to cart <i class="fa fa-cart-plus" aria-hidden="true"></i>
             </button>
-            <div> {{ itemQ }}in cart</div>
-            <!-- <ng-template #updateQuantity>
+            
+            <ng-template #updateQuantity>
               <app-product-quantity 
-              [product]="product" 
-              [shopping-cart]="shoppingCart">
+              [product]="product">
               </app-product-quantity>
-            </ng-template> -->
+            </ng-template>
          </div>
          <div class="col-2">
           <a [routerLink]="['/products/', product.title]" class="btn btn-warning">

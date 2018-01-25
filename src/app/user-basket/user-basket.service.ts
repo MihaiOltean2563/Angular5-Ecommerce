@@ -26,11 +26,6 @@ export class UserBasketService implements OnInit{
         })
     }
 
-    // private getCart(cartId: string){
-    //     console.log("getCart returns: ", this.afs.collection('carts').doc(cartId))
-    //     return this.afs.collection('carts').doc(cartId);
-    // }
-
     private async getOrCreateCartId(){
         let cartId = localStorage.getItem('cartId');
         if(cartId) return cartId;
@@ -38,7 +33,7 @@ export class UserBasketService implements OnInit{
         localStorage.setItem('cartId', result.id);
         return result.id;
     }
-    // getCart method type = Promise<Observable<ShoppingCart>>
+
     async getCart():Promise<Observable<ShoppingCart>>{
         let cartId = await this.getOrCreateCartId();
 
@@ -61,8 +56,7 @@ export class UserBasketService implements OnInit{
     }
 
     async removeFromCart(product: Product){
-        // this.updateItem(product, -1);
-        this.getCart();
+        this.updateItem(product, -1);
     }
 
 
@@ -76,7 +70,6 @@ export class UserBasketService implements OnInit{
                 console.log("Item in cart updated with: ", doc.data());
                 docRef.update({ quantity: (doc.data().quantity || 0) + change})
             } else {
-                // doc.data() will be undefined in this case
                 console.log("Created item in cart!");
                 docRef.set({
                     title: product.title,

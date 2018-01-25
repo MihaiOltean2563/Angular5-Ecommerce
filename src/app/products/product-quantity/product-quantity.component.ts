@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
 import { Product } from 'app/models/product';
 
@@ -7,14 +7,30 @@ import { Product } from 'app/models/product';
   templateUrl: './product-quantity.component.html',
   styleUrls: ['./product-quantity.component.css']
 })
-export class ProductQuantityComponent{
+export class ProductQuantityComponent implements OnInit{
 
-  constructor(private cartService: UserBasketService) {
-    console.log(this.product);
-   }
+  itemQ;
+  itemInCart;
+
+  constructor(private cartService: UserBasketService) {}
   
   @Input('product') product: Product;
   @Input('shopping-cart') shoppingCart;
+
+  async ngOnInit(){
+    this.itemInCart = await this.cartService.getItem(this.product.title);
+    
+    let subscription = this.itemInCart
+   
+    .subscribe( item => {
+      if(item){
+        this.itemQ = item.quantity;
+      }else{
+        this.itemQ =  0;
+      }
+    })
+  }
+  
 
   addToCart(){
     console.log("prod from btns comp: +", this.product);
