@@ -5,13 +5,17 @@ export class ShoppingCartItem {
     id?: string;
     title: string;
     price: number;
-    quantity: number;
+    // quantity?: number;
     category: string;
     imageUrl: string;
     
     
-    // constructor(public product: Product, public quantity: number ){}
-    // get totalPrice(){
-    //     return this.product.price * this.quantity;
-    // }
+    constructor(public product: Product, public quantity: number ){
+        // console.log("got product", this.product);
+        // console.log("got quantity", this.quantity);
+    }
+    
+    get totalPrice(){
+        return this.product.price * this.quantity;
+    }
 }

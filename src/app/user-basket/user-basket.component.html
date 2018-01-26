@@ -13,14 +13,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of cart.itemsInCart">
-                <td>{{ item.title }}</td>
+            <tr *ngFor="let item of cart.items">
+                <td>{{ item.product.title }}</td>
                 <td>
                     <app-product-quantity 
-                    [product]="item">
+                    [product]="item.product">
                     </app-product-quantity>
                 </td>
-                <td>{{ item.price | currency: 'USD'}}</td>
+
+                <td>{{ (item.totalPrice || 0) | currency: 'USD' }}</td>
             </tr>     
         </tbody>
         <tfoot>

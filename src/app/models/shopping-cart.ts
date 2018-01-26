@@ -3,13 +3,18 @@ import { Product } from "app/models/product";
 
 export class ShoppingCart {
     
-    
-    constructor(public itemsInCart) {
-        // console.log("itemsInCart: ",itemsInCart)
-        this.items = itemsInCart;
-    }
-    
+    itemsMap: ShoppingCartItem[] = [];
     items: ShoppingCartItem[] = [];
+
+
+    constructor(public itemsInCart) {
+
+        for(let productId in this.itemsInCart){
+            let item = this.itemsInCart[productId];
+            this.items.push(new ShoppingCartItem(item, item.quantity))
+        }
+    }
+   
 
     get totalItemsCount(){
         let count = 0;
@@ -33,11 +38,5 @@ export class ShoppingCart {
         return sum;
     }
 
-    getQuantity(product: Product){
-        // let item = this.itemsMap[product.$key];
-        // return item ? item.quantity : 0;
-        // console.log('getQ', product)
-        // return this.itemsInCart.map( item => item.title == product.title ? item.quantity : 0);
-    }
 
 }

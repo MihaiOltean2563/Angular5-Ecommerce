@@ -15,16 +15,13 @@ export class UserBasketComponent implements OnInit {
 
   items$: Observable<ShoppingCartItem[]>;
 
-  constructor(private afs: AngularFirestore,
-              private userBasketService: UserBasketService) {
-   }
+  constructor(private afs: AngularFirestore, private userBasketService: UserBasketService) {}
 
-   cart$;
-   shoppingCartItemCount: Observable<any>;
-   itemsInCart;
-   
+  cart$;
+
   async ngOnInit() {
-    this.cart$ = await this.userBasketService.getCart();
+    this.cart$ = await this.userBasketService.getCart()
+    this.cart$.subscribe( cart => console.log("cart", cart));
   }
   
 }

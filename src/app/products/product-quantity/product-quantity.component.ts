@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
 import { Product } from 'app/models/product';
+import { ShoppingCartItem } from 'app/models/shopping-cart-item';
 
 @Component({
   selector: 'app-product-quantity',
@@ -11,6 +12,7 @@ export class ProductQuantityComponent implements OnInit{
 
   itemQ;
   itemInCart;
+  totalEach;
 
   constructor(private cartService: UserBasketService) {}
   
@@ -19,9 +21,8 @@ export class ProductQuantityComponent implements OnInit{
 
   async ngOnInit(){
     this.itemInCart = await this.cartService.getItem(this.product.title);
-
     let subscription = this.itemInCart
-   
+    
     .subscribe( item => {
       if(item){
         this.itemQ = item.quantity;
