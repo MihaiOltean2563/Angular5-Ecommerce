@@ -12,8 +12,6 @@ export class ShoppingCart {
             let item = this.itemsInCart[productId];
             this.items.push(new ShoppingCartItem(item, item.quantity))
         }
-        console.log("this.itemsInCart", this.itemsInCart);
-        console.log("this.items", this.items);
     }
        
 

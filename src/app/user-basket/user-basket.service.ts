@@ -63,12 +63,14 @@ export class UserBasketService implements OnInit{
         let item$ = await this.getItem(product.title);
         const docRef = this.afs.collection('carts').doc(cartId).collection('items').doc(product.title);
     
-
+   
         docRef.ref.get()
         .then(function(doc) {
             if (doc.exists) {
+
                 console.log("Item in cart updated with: ", doc.data());
                 docRef.update({ quantity: (doc.data().quantity || 0) + change});
+                
             } else {
                 console.log("Created item in cart!");
                 docRef.set({
@@ -83,7 +85,16 @@ export class UserBasketService implements OnInit{
             console.log("Error getting document:", error);
         });
         
-        
+        //Remove item from cart if its' quantity is zero
+        docRef.ref.onSnapshot(function(doc){
+            if(doc.exists && doc.data().quantity === 0){
+                docRef.delete().then(function() {
+                    console.log("Document successfully deleted!");
+                }).catch(function(error) {
+                    console.error("Error removing document: ", error);
+                });
+            }
+        })
     }
 
 }
