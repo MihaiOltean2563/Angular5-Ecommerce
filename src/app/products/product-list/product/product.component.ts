@@ -37,10 +37,10 @@ export class ProductComponent implements OnInit {
   itemQ: number;
 
   @Input('product') product: Product;
-  @Input('show-actions') showActions = true;
-  @Input('shopping-cart') shoppingCart: ShoppingCart;
+  @Input('cart') shoppingCart: ShoppingCart;
 
   async ngOnInit() {
+    console.log("cart in product", this.shoppingCart);
     this.itemInCart = await this.cartService.getItem(this.product.title);
     
     let subscription = this.itemInCart
@@ -63,9 +63,5 @@ export class ProductComponent implements OnInit {
     console.log("Added to Cart: ", this.product);
   }
   
-  removeFromCart(){
-    this.cartService.removeFromCart(this.product);
-    console.log("Removed from Cart: ", this.product);
-  }
 
 }

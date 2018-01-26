@@ -7,10 +7,11 @@ export class ShoppingCartItem {
     price: number;
     category: string;
     imageUrl: string;
+    quantity: number;
     
-    constructor(public product: Product, public quantity: number ){}
+    // constructor(public product: Product, public quantity: number ){}
     
     get totalPrice(){
-        return this.product.price * this.quantity;
+        return this.price * this.quantity;
     }
 }

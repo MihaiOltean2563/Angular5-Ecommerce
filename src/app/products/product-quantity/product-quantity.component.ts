@@ -17,8 +17,7 @@ export class ProductQuantityComponent implements OnInit{
   constructor(private cartService: UserBasketService) {}
   
   @Input('product') product: Product;
-  @Input('shopping-cart') shoppingCart;
-
+  
   async ngOnInit(){
     this.itemInCart = await this.cartService.getItem(this.product.title);
     let subscription = this.itemInCart

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'app/models/product';
 import { ProductService } from 'app/products/products.service';
 
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -11,5 +12,5 @@ import { ProductService } from 'app/products/products.service';
 export class ProductsComponent{
 
   constructor() { }
-
+ 
 }

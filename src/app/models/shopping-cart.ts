@@ -10,7 +10,9 @@ export class ShoppingCart {
         
         for(let productId in this.itemsInCart){
             let item = this.itemsInCart[productId];
-            this.items.push(new ShoppingCartItem(item, item.quantity))
+            let x = new ShoppingCartItem();
+            Object.assign(x, item);
+            this.items.push(x);
         }
     }
        
@@ -37,6 +39,10 @@ export class ShoppingCart {
         }
         return sum;
     }
-
+    
+    getQuantity(product: Product){
+        let item = this.itemsInCart[product.title]
+        return item ? item.quantity : 0;
+    }
 
 }
