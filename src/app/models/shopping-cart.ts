@@ -5,14 +5,11 @@ export class ShoppingCart {
     
     items: ShoppingCartItem[] = [];
 
-
     constructor(public itemsInCart) {
         
         for(let productId in this.itemsInCart){
             let item = this.itemsInCart[productId];
-            let x = new ShoppingCartItem();
-            Object.assign(x, item);
-            this.items.push(x);
+            this.items.push(new ShoppingCartItem(...item));
         }
     }
        
@@ -40,9 +37,4 @@ export class ShoppingCart {
         return sum;
     }
     
-    getQuantity(product: Product){
-        let item = this.itemsInCart[product.title]
-        return item ? item.quantity : 0;
-    }
-
 }
