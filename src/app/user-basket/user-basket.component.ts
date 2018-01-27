@@ -24,4 +24,7 @@ export class UserBasketComponent implements OnInit {
     this.cart$.subscribe( cart => console.log("cart", cart));
   }
   
+  clearCart(){
+    this.userBasketService.clearCart();
+  }
 }

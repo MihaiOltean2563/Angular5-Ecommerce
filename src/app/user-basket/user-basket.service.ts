@@ -32,6 +32,17 @@ export class UserBasketService implements OnInit{
         return result.id;
     }
 
+    async clearCart(){
+        let cartId = await this.getOrCreateCartId();
+        const itemsCollectionRef = 
+        this.afs.collection('carts').doc(cartId).collection('items').snapshotChanges();
+        itemsCollectionRef.subscribe( items => {
+            items.forEach(item => {
+                return item.payload.doc.ref.delete();
+            })
+        })
+    }
+
     async getCart():Promise<Observable<ShoppingCart>>{
         let cartId = await this.getOrCreateCartId();
 
