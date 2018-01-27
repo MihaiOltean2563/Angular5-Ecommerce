@@ -15,6 +15,7 @@ import { Routes, RouterModule, Router } from "@angular/router";
 import { Observable } from 'rxjs/Observable';
 import { ShoppingCart } from 'app/models/shopping-cart';
 import { Subscription } from 'rxjs/Subscription';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 
 @Component({
@@ -27,33 +28,20 @@ export class ProductComponent implements OnInit {
   constructor(private productService: ProductService,
               private cartService: UserBasketService,
               private modalService: BsModalService,
-              private router: Router) {}
+              private router: Router,
+              private afs: AngularFirestore) {}
 
               
   modalRef: BsModalRef;
   cart: Observable<ShoppingCart>;
   subscription: Subscription;
-  itemInCart;
+  itemInProd;
   itemQ: number;
 
   @Input('product') product: Product;
   @Input('cart') shoppingCart: ShoppingCart;
 
-  async ngOnInit() {
-    // console.log("cart in product", this.shoppingCart);
-    // console.log(" product", this.product);
-    this.itemInCart = await this.cartService.getItem(this.product.title);
-    
-    let subscription = this.itemInCart
-   
-    .subscribe( item => {
-      if(item){
-        this.itemQ = item.quantity;
-      }else{
-        this.itemQ =  0;
-      }
-    })
-  }
+  async ngOnInit() {}
 
   openModal(template: TemplateRef<ElementRef>){
     this.modalRef = this.modalService.show(template);

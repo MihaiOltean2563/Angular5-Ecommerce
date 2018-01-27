@@ -11,12 +11,15 @@ import { AngularFirestoreDocument, AngularFirestore, AngularFirestoreCollection 
 import { ShoppingCartItem } from "app/models/shopping-cart-item";
 
 
+
 @Injectable()
 export class UserBasketService implements OnInit{
 
+
     constructor(private afs: AngularFirestore){} 
 
-    ngOnInit(){}
+    async ngOnInit(){
+    }
 
     private async create(){
         return this.afs.collection('carts').add({
@@ -28,6 +31,7 @@ export class UserBasketService implements OnInit{
         let cartId = localStorage.getItem('cartId');
         if(cartId) return cartId;
         let result = await this.create();
+        console.log("Result", result);
         localStorage.setItem('cartId', result.id);
         return result.id;
     }
@@ -37,9 +41,12 @@ export class UserBasketService implements OnInit{
         const itemsCollectionRef = 
         this.afs.collection('carts').doc(cartId).collection('items').snapshotChanges();
         itemsCollectionRef.subscribe( items => {
-            items.forEach(item => {
-                return item.payload.doc.ref.delete();
-            })
+            if(items){
+                items.forEach(item => {
+                    return item.payload.doc.ref.delete();
+                })
+            }
+            
         })
     }
 
@@ -52,13 +59,13 @@ export class UserBasketService implements OnInit{
         return itemsObservable.map(x => new ShoppingCart(x));
     }
    
-     async getItem(productId){
+     async getItem(product){
         let cartId = await this.getOrCreateCartId();
-        if(!productId){
-            productId = 'Apple'; //temporary fix?
+        if(!product){
+            product = 'Apple'; //temporary fix?
         }
         const document: AngularFirestoreDocument<ShoppingCartItem> =
-        this.afs.collection('carts').doc(cartId).collection('items').doc(productId)
+        this.afs.collection('carts').doc(cartId).collection('items').doc(product)
         const document$: Observable<ShoppingCartItem> = document.valueChanges();
         return document$;
     }
@@ -75,8 +82,10 @@ export class UserBasketService implements OnInit{
 
     private async updateItem(product: Product, change: number){
         let cartId = await this.getOrCreateCartId();
+        console.log("cartId", cartId);
         let item$ = await this.getItem(product.title);
         const docRef = this.afs.collection('carts').doc(cartId).collection('items').doc(product.title);
+
 
         docRef.ref.get()
         .then(function(doc) {
@@ -87,6 +96,7 @@ export class UserBasketService implements OnInit{
                 
             } else {
                 console.log("Created item in cart!");
+                
                 docRef.set({
                     title: product.title,
                     category: product.category,
@@ -109,6 +119,10 @@ export class UserBasketService implements OnInit{
                 });
             }
         })
+    }
+
+    getQuantity(){
+        
     }
 
 }

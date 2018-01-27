@@ -1,9 +1,19 @@
-<div class="row no-gutters text-center">
-  <div class="col-3">
-    <button class="btn btn-secondary btn-block" (click)="removeFromCart()">-</button>
-  </div>
-  <div class="col align-self-center"> {{ itemQ }} in cart</div>
-  <div class="col-3">
-    <button class="btn btn-secondary btn-block shift-right" (click)="addToCart()">+</button>
-  </div>
-</div>
+<button (click)="addToCart()"
+class="btn btn-success btn-block"
+*ngIf="itemQ == 0; else updateQuantity">
+Add to cart <i class="fa fa-cart-plus" aria-hidden="true"></i>
+</button>
+
+<ng-template #updateQuantity>
+    <div class="row no-gutters text-center">
+        <div class="col-3">
+          <button class="btn btn-secondary btn-block" (click)="removeFromCart()">-</button>
+        </div>
+        <div class="col align-self-center"> {{ itemQ }} in cart</div>
+        <div class="col-3">
+          <button class="btn btn-secondary btn-block shift-right" (click)="addToCart()">+</button>
+        </div>
+      </div>
+</ng-template>
+
+
