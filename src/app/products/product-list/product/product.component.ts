@@ -40,7 +40,8 @@ export class ProductComponent implements OnInit {
   @Input('cart') shoppingCart: ShoppingCart;
 
   async ngOnInit() {
-    console.log("cart in product", this.shoppingCart);
+    // console.log("cart in product", this.shoppingCart);
+    // console.log(" product", this.product);
     this.itemInCart = await this.cartService.getItem(this.product.title);
     
     let subscription = this.itemInCart

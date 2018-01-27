@@ -10,12 +10,11 @@ export interface Category{
 @Injectable()
 export class CategoryService {
 
-  constructor(private db: AngularFireDatabase,
-              private afs: AngularFirestore) {
-   }
+  constructor(private afs: AngularFirestore) {}
 
   getAll(){
-    let categories: AngularFirestoreCollection<Category> = this.afs.collection('categories', ref => ref.orderBy('name'));
+    let categories: AngularFirestoreCollection<Category> = 
+    this.afs.collection('categories', ref => ref.orderBy('name'));
     let observableCategories$:Observable<Category[]> = categories.valueChanges();
     return observableCategories$;
   }

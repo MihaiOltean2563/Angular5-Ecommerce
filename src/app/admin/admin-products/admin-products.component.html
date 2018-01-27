@@ -33,7 +33,7 @@
 </data-table-column>
 
 <data-table-column
-[property]="'$key'">
+[property]="'item.title'">
     <ng-template #dataTableCell let-item="item">
         <a [routerLink]="['/admin/products/', item.title]">Edit</a>
     </ng-template>

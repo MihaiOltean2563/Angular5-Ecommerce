@@ -3,8 +3,6 @@ import {Http, Response} from '@angular/http';
 import { Product } from 'app/models/product';
 import { Subject } from 'rxjs/Subject';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
-import { AngularFireDatabase,  } from 'angularfire2/database';
-import { FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { AngularFirestore,
     AngularFirestoreDocument,
     AngularFirestoreCollection} from 'angularfire2/firestore';
@@ -15,7 +13,6 @@ export class ProductService {
 
     constructor(private http: Http,
                 private userBasketService: UserBasketService,
-                private db: AngularFireDatabase,
                 private afs: AngularFirestore){
                 }
    
@@ -36,14 +33,15 @@ export class ProductService {
     }
 
     get(productId){
-        return this.afs.collection('products/').doc(productId).valueChanges();
+        console.log('productId in Get', productId);
+        return this.afs.collection('products').doc(productId).valueChanges();
     }
 
     update(productId, product){
-        return this.afs.collection('products/').doc(productId).update(product);
+        return this.afs.collection('products').doc(productId).update(product);
     }
 
     delete(productId){
-        return this.afs.collection('products/').doc(productId).delete();
+        return this.afs.collection('products').doc(productId).delete();
     }
 }

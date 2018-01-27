@@ -43,7 +43,11 @@ export class UserBasketService implements OnInit{
    
      async getItem(productId){
         let cartId = await this.getOrCreateCartId();
-        const document: AngularFirestoreDocument<ShoppingCartItem> =  this.afs.collection('carts').doc(cartId).collection('items').doc(productId)
+        if(!productId){
+            productId = 'Apple'; //temporary fix?
+        }
+        const document: AngularFirestoreDocument<ShoppingCartItem> =
+        this.afs.collection('carts').doc(cartId).collection('items').doc(productId)
         const document$: Observable<ShoppingCartItem> = document.valueChanges();
         return document$;
     }
@@ -62,8 +66,7 @@ export class UserBasketService implements OnInit{
         let cartId = await this.getOrCreateCartId();
         let item$ = await this.getItem(product.title);
         const docRef = this.afs.collection('carts').doc(cartId).collection('items').doc(product.title);
-    
-   
+
         docRef.ref.get()
         .then(function(doc) {
             if (doc.exists) {
