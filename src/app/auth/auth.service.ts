@@ -2,43 +2,74 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'app/auth/user.service';
 import { AppUser } from 'app/models/app-user';
 import 'rxjs/add/operator/switchMap';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+
+interface User {
+  uid: string;
+  email: string;
+  displayName?: string;
+}
 
 @Injectable()
 export class AuthService {
 
-  user$: Observable<firebase.User>;
+  user: Observable<User>;
+  
    constructor(
     private userService: UserService,
     private afAuth: AngularFireAuth, 
     private route: ActivatedRoute,
-    private cartService: UserBasketService) {
-      this.user$ = this.afAuth.authState;
+    private router: Router,
+    private cartService: UserBasketService,
+    private afs: AngularFirestore) {
+
+      this.user = this.afAuth.authState
+      .switchMap(user => {
+        if(user){
+          return this.afs.collection('users').doc(user.uid).valueChanges();
+        }else{
+          return Observable.of(null);
+        }
+      })
     }
 
+    
 
   login(){
+    const provider = new firebase.auth.GoogleAuthProvider();
     let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-
     localStorage.setItem('returnUrl', returnUrl);
-    this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+    return this.oAuthLogin(provider);
+  }
+
+  private oAuthLogin(provider) {
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then((credential) => {
+        this.updateUserData(credential.user)
+      })
+  }
+
+  private updateUserData(user) {
+    // Sets user data to firestore on login
+    const userRef: AngularFirestoreDocument<User> = this.afs.collection('users').doc(user.uid);
+    const data: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName
+    }
+    return userRef.set(data)
   }
 
   logout(){
-    this.afAuth.auth.signOut();
+    // this.afAuth.auth.signOut();
+    this.afAuth.auth.signOut().then(() => {
+      this.router.navigate(['/']);
+  });
   }
-
-  get appUser$() : Observable<AppUser> {
-    return this.user$
-      .switchMap(user => {
-        if (user) return this.userService.get(user.uid);
-
-        return Observable.of(null);
-      });    
-  }
-  
+ 
 }

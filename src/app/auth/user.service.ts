@@ -10,14 +10,16 @@ from 'angularfire2/database-deprecated';
 
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 
 @Injectable()
 export class UserService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase,
+              private afs: AngularFirestore) { }
 
-  save(user: firebase.User){
+  save(user){
     this.db.object('/users/' + user.uid).update({
       name: user.displayName,
       email: user.email

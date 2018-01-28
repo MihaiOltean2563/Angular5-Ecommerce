@@ -72,6 +72,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { CategoryService } from './shared/category.service';
 import { ProductFilterComponent } from './products/product-list/product-filter/product-filter.component';
 import { ProductQuantityComponent } from './products/product-quantity/product-quantity.component';
+import { OrderService } from 'app/order.service';
 
 
 
@@ -127,7 +128,8 @@ import { ProductQuantityComponent } from './products/product-quantity/product-qu
     AdminAuthGuard,
     CategoryService,
     AngularFireModule,
-    AngularFireDatabase
+    AngularFireDatabase,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

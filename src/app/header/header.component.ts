@@ -7,6 +7,7 @@ import { UserBasketService } from 'app/user-basket/user-basket.service';
 import { ShoppingCart } from 'app/models/shopping-cart';
 import { AngularFireObject } from 'angularfire2/database/interfaces';
 import { Subscription } from 'rxjs/Subscription';
+import { User } from 'firebase/app';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
 
   appUser: AppUser;
   cart$: Observable<ShoppingCart>;
+  user: Observable<User>;
 
   constructor(
     private dataStorageService: DataStorageService,
@@ -27,7 +29,11 @@ export class HeaderComponent implements OnInit {
 
 
   async ngOnInit() {
-    this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
+    // this.auth.user.subscribe(user => {
+    //   this.appuserUser = user;
+    //   console.log("user", user.displayName);
+    // });
+    // this.user = this.auth.user$;
     this.cart$ = await this.cartService.getCart();
   }
   
