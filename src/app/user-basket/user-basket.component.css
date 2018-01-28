@@ -1,3 +1,8 @@
 .img-cart{
-    max-width: 12%;
+    max-width: 70px;
+    padding-right:10px;
+}
+
+button:hover{
+    cursor: pointer;
 }

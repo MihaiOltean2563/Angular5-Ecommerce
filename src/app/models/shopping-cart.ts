@@ -5,7 +5,7 @@ export class ShoppingCart {
     
     items: ShoppingCartItem[] = [];
 
-    constructor(public itemsInCart) {
+    constructor(private itemsInCart) {
         
         for(let productId in this.itemsInCart){
             let item = this.itemsInCart[productId];

@@ -12,7 +12,7 @@
       <p class="card-text">{{product.price | currency: 'USD'}}</p>
     </div>
 
-    <div class="card-footer" *ngIf="shoppingCart">
+    <div class="card-footer">  
        <div class="row no-gutters">
          <div class="col-2">
           <a (click)="openModal(template)"
