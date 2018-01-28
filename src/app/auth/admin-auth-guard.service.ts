@@ -8,14 +8,22 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AdminAuthGuard implements CanActivate{
+  // user: Observable<boolean>;
 
-  constructor(private auth: AuthService, private userService: UserService) { }
+  constructor(private auth: AuthService, private userService: UserService) { 
+    // this.user = this.auth.user;
+    // console.log("user", this.user);
+  }
 
   canActivate(): Observable<boolean> {
-     return this.auth.user$
-      .map(appUser => {
-        // appUser.isAdmin
-        return appUser.displayName === 'mike';
-      })
+    return this.auth.user.map( user => {
+      console.log("user: ", user);
+      if(user['isAdmin']) return true;
+
+      // this.router.navigate(['/login'], {
+      //   queryParams: { returnUrl: state.url }
+      // });
+      return false;
+    });
   }
 }

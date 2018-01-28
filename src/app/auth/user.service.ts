@@ -19,15 +19,15 @@ export class UserService {
   constructor(private db: AngularFireDatabase,
               private afs: AngularFirestore) { }
 
-  save(user){
-    this.db.object('/users/' + user.uid).update({
-      name: user.displayName,
-      email: user.email
-    })
-  }
+  // save(user){
+  //   this.db.object('/users/' + user.uid).update({
+  //     name: user.displayName,
+  //     email: user.email
+  //   })
+  // }
 
-  get(uid: string): FirebaseObjectObservable<AppUser>{
-    return this.db.object('/users/'+ uid);
-  }
+  // get(uid: string): FirebaseObjectObservable<AppUser>{
+  //   return this.db.object('/users/'+ uid);
+  // }
 
 }
