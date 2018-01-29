@@ -47,7 +47,6 @@ export class UserBasketService implements OnInit{
                     return item.payload.doc.ref.delete();
                 })
             }
-            
         })
     }
 
