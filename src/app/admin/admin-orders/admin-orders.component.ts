@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { OrderService } from 'app/order.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { OrderService } from 'app/order.service';
   templateUrl: './admin-orders.component.html',
   styleUrls: ['./admin-orders.component.css']
 })
-export class AdminOrdersComponent implements OnInit {
+export class AdminOrdersComponent {
   
   orders$;
 
@@ -14,8 +14,5 @@ export class AdminOrdersComponent implements OnInit {
     this.orders$ = this.orderService.getOrders();
   }
 
-  ngOnInit() {
-    console.log("orders", this.orders$)
-  }
 
 }

@@ -30,7 +30,8 @@ export class OrderService{
   }
 
   getOrdersForUser(){
-    let ref = this.afs.collection('orders');    
+    let ref = this.afs.collection('orders');
+    // ref.ref.where("","==","")    
   }
 
 }
