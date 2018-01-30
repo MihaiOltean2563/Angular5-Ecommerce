@@ -1,15 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Order } from 'app/models/order';
 import { Router } from '@angular/router';
 import { RouterModule, Routes } from '@angular/router';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
+import { AuthService } from 'app/auth/auth.service';
 
 @Injectable()
-export class OrderService {
+export class OrderService{
+
+  user$;
 
   constructor(private afs: AngularFirestore,
-              private cartService: UserBasketService) { }
+              private cartService: UserBasketService) { 
+               
+              }
 
   async placeOrder(order: Order){
     //firestore won't let you add an instance of object of type Order to the add method
@@ -18,6 +23,14 @@ export class OrderService {
     let result = await this.afs.collection('orders').add(orderObj);
     this.cartService.clearCart();
     return result;
+  }
+
+  getOrders(){
+    return this.afs.collection('orders').valueChanges();
+  }
+
+  getOrdersForUser(){
+    let ref = this.afs.collection('orders');    
   }
 
 }
