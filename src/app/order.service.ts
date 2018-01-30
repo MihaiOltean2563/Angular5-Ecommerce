@@ -29,9 +29,9 @@ export class OrderService{
     return this.afs.collection('orders').valueChanges();
   }
 
-  getOrdersForUser(){
+  getOrdersForUser(userId: string){
     let ref = this.afs.collection('orders');
-    // ref.ref.where("","==","")    
+    return ref.ref.where("userId","==", userId);    
   }
 
 }
