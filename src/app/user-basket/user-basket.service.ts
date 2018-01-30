@@ -52,9 +52,7 @@ export class UserBasketService implements OnInit{
 
     async getCart():Promise<Observable<ShoppingCart>>{
         let cartId = await this.getOrCreateCartId();
-
-        let items: AngularFirestoreCollection<ShoppingCartItem[]> = 
-        this.afs.collection('carts').doc(cartId).collection('items');
+        let items: AngularFirestoreCollection<ShoppingCartItem[]> = this.afs.collection('carts').doc(cartId).collection('items');
         let itemsObservable = items.valueChanges();
         return itemsObservable.map(x => new ShoppingCart(x));
     }

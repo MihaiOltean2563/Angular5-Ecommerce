@@ -73,6 +73,8 @@ import { CategoryService } from './shared/category.service';
 import { ProductFilterComponent } from './products/product-list/product-filter/product-filter.component';
 import { ProductQuantityComponent } from './products/product-quantity/product-quantity.component';
 import { OrderService } from 'app/order.service';
+import { ShoppingCartSummaryComponent } from './user-basket/shopping-cart-summary/shopping-cart-summary.component';
+import { ShippingFormComponent } from './user-basket/shipping-form/shipping-form.component';
 
 
 
@@ -98,7 +100,9 @@ import { OrderService } from 'app/order.service';
     LoginComponent,
     ProductFormComponent,
     ProductFilterComponent,
-    ProductQuantityComponent
+    ProductQuantityComponent,
+    ShoppingCartSummaryComponent,
+    ShippingFormComponent
   ],
   imports: [
     DataTableModule,
