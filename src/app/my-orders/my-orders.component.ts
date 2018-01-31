@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { OrderService } from 'app/order.service';
 import { AuthService } from 'app/auth/auth.service';
+import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-my-orders',
@@ -11,15 +13,15 @@ export class MyOrdersComponent{
   
   orders$;
   user$;
+  userId;
 
-  constructor(private orderService: OrderService, private authService: AuthService) { 
+  constructor(private orderService: OrderService, private authService: AuthService, private afs: AngularFirestore) { 
     this.user$ = this.authService.user;
     this.user$.subscribe( user => {
-      // console.log(user.uid);
-      this.orders$ = this.orderService.getOrdersForUser(user.uid);
-      console.log("em", this.orderService.getOrdersForUser(user.uid))
-    })  
-    // this.orders$ = this.user$.map( user => console.log(this.orderService.getOrdersForUser(user.uid)));
+      this.userId = user.uid;
+      this.orders$ = orderService.getOrdersForUser(this.userId);
+    })
+  
   }
 
 

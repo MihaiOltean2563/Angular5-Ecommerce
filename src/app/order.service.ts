@@ -5,11 +5,10 @@ import { Router } from '@angular/router';
 import { RouterModule, Routes } from '@angular/router';
 import { UserBasketService } from 'app/user-basket/user-basket.service';
 import { AuthService } from 'app/auth/auth.service';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class OrderService{
-
-  user$;
 
   constructor(private afs: AngularFirestore,
               private cartService: UserBasketService) { 
@@ -30,8 +29,10 @@ export class OrderService{
   }
 
   getOrdersForUser(userId: string){
-    let ref = this.afs.collection('orders');
-    return ref.ref.where("userId","==", userId);    
+    let ref = this.afs.collection('orders', ref => {
+      return ref.where("userId", "==", userId);
+    });
+    return ref.valueChanges();
   }
 
 }
