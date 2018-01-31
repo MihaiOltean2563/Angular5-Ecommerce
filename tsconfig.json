@@ -4,9 +4,9 @@
     "outDir": "./dist/out-tsc",
     "baseUrl": "src",
     "paths": {
-      "@angular/*": [
-        "../node_modules/@angular/*"
-    ]},
+      "@angular/*": ["../node_modules/@angular/*"],
+      "shared/*": [ "app/shared/*"]
+    },
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",

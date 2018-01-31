@@ -1,14 +1,14 @@
 import {  Injectable, OnInit, EventEmitter } from "@angular/core";
-import { Product } from "app/models/product";
+import { Product } from "shared/models/product";
 import { AngularFireDatabase } from "angularfire2/database";
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 
-import { ShoppingCart } from "app/models/shopping-cart";
+import { ShoppingCart } from "shared/models/shopping-cart";
 import { AngularFireObject, AngularFireList } from "angularfire2/database/interfaces";
 import { AngularFirestoreDocument, AngularFirestore, AngularFirestoreCollection } from "angularfire2/firestore";
-import { ShoppingCartItem } from "app/models/shopping-cart-item";
+import { ShoppingCartItem } from "shared/models/shopping-cart-item";
 
 
 

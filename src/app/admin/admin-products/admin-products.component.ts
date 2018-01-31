@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProductService,  } from 'app/products/products.service';
+import { ProductService,  } from 'app/shared/services/products.service';
 import { FirebaseListObservable } from 'angularfire2/database-deprecated';
 import { AngularFireList } from 'angularfire2/database/interfaces';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Subscriber } from 'rxjs/Subscriber';
-import { Product } from 'app/models/product';
+import { Product } from 'shared/models/product';
 import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
 
 @Component({

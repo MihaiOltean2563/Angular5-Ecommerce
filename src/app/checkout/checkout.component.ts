@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserBasketService } from 'app/user-basket/user-basket.service';
-import { ShoppingCart } from 'app/models/shopping-cart';
+import { UserBasketService } from 'app/shared/services/user-basket.service';
+import { ShoppingCart } from 'shared/models/shopping-cart';
 import { Observable } from 'rxjs/Observable';
 
 @Component({

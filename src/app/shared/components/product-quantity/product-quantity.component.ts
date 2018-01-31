@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserBasketService } from 'app/user-basket/user-basket.service';
-import { Product } from 'app/models/product';
-import { ShoppingCartItem } from 'app/models/shopping-cart-item';
+import { UserBasketService } from 'app/shared/services/user-basket.service';
+import { Product } from 'shared/models/product';
+import { ShoppingCartItem } from 'shared/models/shopping-cart-item';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Subscription } from 'rxjs/Subscription';
 

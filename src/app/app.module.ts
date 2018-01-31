@@ -34,7 +34,7 @@ import { HeaderComponent } from './header/header.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
-import { ProductComponent } from './products/product-list/product/product.component';
+import { ProductComponent } from './shared/components/product/product.component';
 import { UserBasketComponent } from './user-basket/user-basket.component';
 import { UserBasketEditComponent } from './user-basket/user-basket-edit/user-basket-edit.component';
 import { AppRoutingModule } from 'app/app.routing.module';
@@ -42,9 +42,8 @@ import { AppRoutingModule } from 'app/app.routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //Services 
-import { ProductService } from './products/products.service';
-import { DataStorageService } from './shared/data-storage.service';
-import { UserBasketService } from 'app/user-basket/user-basket.service';
+import { ProductService } from './shared/services/products.service';
+import { UserBasketService } from 'app/shared/services/user-basket.service';
 
 //Ngx-Bootstrap
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -56,7 +55,7 @@ import { CustomFormsModule } from 'ng2-validation';
 
 
 //Directives
-import { ProductModalDirective } from 'app/shared/product-modal.directive';
+import { ProductModalDirective } from 'app/shared/directives/product-modal.directive';
 import { HomeComponent } from './home/home.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
@@ -64,15 +63,15 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
-import { AuthService } from 'app/auth/auth.service';
-import { AuthGuard } from 'app/auth/auth.guard.service';
+import { AuthService } from 'app/shared/services/auth.service';
+import { AuthGuard } from 'app/shared/services/auth.guard.service';
 import { UserService } from 'app/auth/user.service';
 import { AdminAuthGuard } from 'app/auth/admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
-import { CategoryService } from './shared/category.service';
+import { CategoryService } from './shared/services/category.service';
 import { ProductFilterComponent } from './products/product-list/product-filter/product-filter.component';
-import { ProductQuantityComponent } from './products/product-quantity/product-quantity.component';
-import { OrderService } from 'app/order.service';
+import { ProductQuantityComponent } from './shared/components/product-quantity/product-quantity.component';
+import { OrderService } from 'app/shared/services/order.service';
 import { ShoppingCartSummaryComponent } from './user-basket/shopping-cart-summary/shopping-cart-summary.component';
 import { ShippingFormComponent } from './user-basket/shipping-form/shipping-form.component';
 
@@ -124,7 +123,6 @@ import { ShippingFormComponent } from './user-basket/shipping-form/shipping-form
   ],
   providers: [
     ProductService, 
-    DataStorageService, 
     UserBasketService,
     AuthService,
     AuthGuard,

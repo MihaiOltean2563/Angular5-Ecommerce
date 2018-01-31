@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
-import { ShoppingCart } from 'app/models/shopping-cart';
+import { ShoppingCart } from 'shared/models/shopping-cart';
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({

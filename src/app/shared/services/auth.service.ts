@@ -4,9 +4,9 @@ import * as firebase from 'firebase';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'app/auth/user.service';
-import { AppUser } from 'app/models/app-user';
+import { AppUser } from 'shared/models/app-user';
 import 'rxjs/add/operator/switchMap';
-import { UserBasketService } from 'app/user-basket/user-basket.service';
+import { UserBasketService } from 'app/shared/services/user-basket.service';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 
 interface User {

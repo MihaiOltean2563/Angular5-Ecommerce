@@ -1,16 +1,15 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, TemplateRef, ElementRef } from '@angular/core';
 
-import { DataStorageService } from 'app/shared/data-storage.service';
 import { Response } from '@angular/http';
-import { Product } from 'app/models/product';
-import { ProductService } from 'app/products/products.service';
+import { Product } from 'shared/models/product';
+import { ProductService } from 'app/shared/services/products.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { UserBasketService } from 'app/user-basket/user-basket.service';
+import { UserBasketService } from 'app/shared/services/user-basket.service';
 import { Subscription } from 'rxjs/Subscription';
-import { ShoppingCart } from 'app/models/shopping-cart';
+import { ShoppingCart } from 'shared/models/shopping-cart';
 import { Observable } from 'rxjs/Observable';
 
 @Component({

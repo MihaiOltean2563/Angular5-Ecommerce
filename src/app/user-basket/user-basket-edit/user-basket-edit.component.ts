@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserBasketService } from 'app/user-basket/user-basket.service';
+import { UserBasketService } from 'app/shared/services/user-basket.service';
 
 @Component({
   selector: 'app-user-basket-edit',

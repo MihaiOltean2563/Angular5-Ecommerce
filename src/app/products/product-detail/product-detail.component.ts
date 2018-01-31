@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'app/models/product';
+import { Product } from 'shared/models/product';
 import { ActivatedRoute, Params } from '@angular/router';
-import { ProductService } from 'app/products/products.service';
+import { ProductService } from 'app/shared/services/products.service';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireObject, AngularFireList } from 'angularfire2/database/interfaces';
 import { AngularFireDatabase } from 'angularfire2/database';

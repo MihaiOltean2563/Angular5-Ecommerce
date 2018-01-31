@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from 'app/models/product';
-import { UserBasketService } from 'app/user-basket/user-basket.service';
+import { Product } from 'shared/models/product';
+import { UserBasketService } from 'app/shared/services/user-basket.service';
 import { Observable } from 'rxjs/Observable';
-import { ShoppingCartItem } from 'app/models/shopping-cart-item';
+import { ShoppingCartItem } from 'shared/models/shopping-cart-item';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { ShoppingCart } from 'app/models/shopping-cart';
+import { ShoppingCart } from 'shared/models/shopping-cart';
 
 @Component({
   selector: 'app-user-basket',

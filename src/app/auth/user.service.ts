@@ -1,4 +1,4 @@
-import { AppUser } from 'app/models/app-user';
+import { AppUser } from 'shared/models/app-user';
 import { Injectable } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 // import { AngularFireDatabase } from 'angularfire2/database';

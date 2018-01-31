@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { ProductsComponent } from "app/products/products.component";
 import { UserBasketComponent } from "app/user-basket/user-basket.component";
-import { ProductStartComponent } from "app/products/product-start/product-start.component";
 import { ProductDetailComponent } from "app/products/product-detail/product-detail.component";
 import { HomeComponent } from "app/home/home.component";
 import { CheckoutComponent } from "app/checkout/checkout.component";
@@ -11,7 +10,7 @@ import { LoginComponent } from "app/login/login.component";
 import { AdminProductsComponent } from "app/admin/admin-products/admin-products.component";
 import { AdminOrdersComponent } from "app/admin/admin-orders/admin-orders.component";
 import { MyOrdersComponent } from "app/my-orders/my-orders.component";
-import { AuthGuard } from "app/auth/auth.guard.service";
+import { AuthGuard } from "app/shared/services/auth.guard.service";
 import { AdminAuthGuard } from "app/auth/admin-auth-guard.service";
 import { ProductFormComponent } from "app/admin/product-form/product-form.component";
 

@@ -1,10 +1,10 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Order } from 'app/models/order';
+import { Order } from 'shared/models/order';
 import { Router } from '@angular/router';
 import { RouterModule, Routes } from '@angular/router';
-import { UserBasketService } from 'app/user-basket/user-basket.service';
-import { AuthService } from 'app/auth/auth.service';
+import { UserBasketService } from 'app/shared/services/user-basket.service';
+import { AuthService } from 'app/shared/services/auth.service';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -30,7 +30,7 @@ export class OrderService{
 
   getOrdersForUser(userId: string){
     let ref = this.afs.collection('orders', ref => {
-      return ref.where("userId", "==", userId);
+      return ref.where("userId", "==", userId).where("shipping.name", "==", "cornescu");
     });
     return ref.valueChanges();
   }

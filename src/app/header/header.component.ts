@@ -1,10 +1,9 @@
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
-import { DataStorageService } from 'app/shared/data-storage.service';
-import { AuthService } from 'app/auth/auth.service';
-import { AppUser } from 'app/models/app-user';
-import { UserBasketService } from 'app/user-basket/user-basket.service';
-import { ShoppingCart } from 'app/models/shopping-cart';
+import { AuthService } from 'app/shared/services/auth.service';
+import { AppUser } from 'shared/models/app-user';
+import { UserBasketService } from 'app/shared/services/user-basket.service';
+import { ShoppingCart } from 'shared/models/shopping-cart';
 import { AngularFireObject } from 'angularfire2/database/interfaces';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -22,7 +21,6 @@ export class HeaderComponent implements OnInit {
   user: Observable<any>;
 
   constructor(
-    private dataStorageService: DataStorageService,
     private auth: AuthService,
     private cartService: UserBasketService){
   }
