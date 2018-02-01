@@ -1,11 +1,12 @@
 <h1>Shopping Cart</h1>
 
 
+<p *ngIf="cart$ | async as cart">
+    You have {{ cart.totalItemsCount ||'no'}} items in your shopping cart.
+    <button (click)="clearCart()" *ngIf="cart.items.length" class="pull-right btn btn-secondary btn-sm">Clear Shopping Cart</button>
+</p>
+
 <div class="row col-10" *ngIf="cart$ | async as cart">
-    <p>You have {{ cart.totalItemsCount ||'no'}} items in your shopping cart.
-        <button (click)="clearCart()" *ngIf="cart.items.length" class="btn btn-secondary btn-sm">Clear Shopping Cart</button>
-    </p>
-    
     <table class="table">
         <thead>
             <tr>

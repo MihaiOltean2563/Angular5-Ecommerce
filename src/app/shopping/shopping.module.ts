@@ -1,6 +1,4 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CheckoutComponent } from 'app/shopping/components/checkout/checkout.component';
 import { MyOrdersComponent } from 'app/shopping/components/my-orders/my-orders.component';
@@ -9,6 +7,7 @@ import { ProductDetailComponent } from 'app/shopping/components/products/product
 import {
   ProductFilterComponent,
 } from 'app/shopping/components/products/product-list/product-filter/product-filter.component';
+import { ProductListComponent } from 'app/shopping/components/products/product-list/product-list.component';
 import { ProductsComponent } from 'app/shopping/components/products/products.component';
 import { ShippingFormComponent } from 'app/shopping/components/shipping-form/shipping-form.component';
 import { ShoppingCartSummaryComponent } from 'app/shopping/components/shopping-cart-summary/shopping-cart-summary.component';
@@ -16,12 +15,9 @@ import { UserBasketComponent } from 'app/shopping/components/user-basket/user-ba
 import { AuthGuard } from 'shared/services/auth.guard.service';
 import { CategoryService } from 'shared/services/category.service';
 import { SharedModule } from 'shared/shared.module';
-import { ProductListComponent } from 'app/shopping/components/products/product-list/product-list.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
     SharedModule,
     RouterModule.forChild([
       { path: 'products', component: ProductsComponent},

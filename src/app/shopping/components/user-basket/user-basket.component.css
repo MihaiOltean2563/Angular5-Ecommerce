@@ -6,3 +6,7 @@
 button:hover{
     cursor: pointer;
 }
+
+p{
+    max-width:895px;
+}
