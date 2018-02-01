@@ -1,15 +1,15 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { ProductsComponent } from "app/products/products.component";
-import { UserBasketComponent } from "app/user-basket/user-basket.component";
-import { ProductDetailComponent } from "app/products/product-detail/product-detail.component";
-import { HomeComponent } from "app/home/home.component";
-import { CheckoutComponent } from "app/checkout/checkout.component";
-import { OrderSuccessComponent } from "app/order-success/order-success.component";
-import { LoginComponent } from "app/login/login.component";
+import { ProductsComponent } from "app/shopping/components/products/products.component";
+import { UserBasketComponent } from "app/shopping/components/user-basket/user-basket.component";
+import { ProductDetailComponent } from "app/shopping/components/products/product-detail/product-detail.component";
+import { HomeComponent } from "app/core/components/home/home.component";
+import { CheckoutComponent } from "app/shopping/components/checkout/checkout.component";
+import { OrderSuccessComponent } from "app/shopping/components/order-success/order-success.component";
+import { LoginComponent } from "app/core/components/login/login.component";
 import { AdminProductsComponent } from "app/admin/components/admin-products/admin-products.component";
 import { AdminOrdersComponent } from "app/admin/components/admin-orders/admin-orders.component";
-import { MyOrdersComponent } from "app/my-orders/my-orders.component";
+import { MyOrdersComponent } from "app/shopping/components/my-orders/my-orders.component";
 import { AuthGuard } from "app/shared/services/auth.guard.service";
 import { AdminAuthGuard } from "app/admin/services/admin-auth-guard.service";
 import { ProductFormComponent } from "app/admin/components/product-form/product-form.component";
@@ -46,14 +46,7 @@ import { ProductFormComponent } from "app/admin/components/product-form/product-
 // ];
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'login', component: LoginComponent},
-    { path: 'products', component: ProductsComponent},
-    { path: 'products/:id', component: ProductDetailComponent},
-    { path: 'basket', component: UserBasketComponent},
-
-    { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard]},
-    { path: 'my-orders', component: MyOrdersComponent, canActivate: [AuthGuard]},
-    { path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGuard]},
+    { path: 'login', component: LoginComponent}
 ]
 
 @NgModule({
