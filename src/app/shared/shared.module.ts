@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { UserService } from 'app/auth/user.service';
 import { ProductQuantityComponent } from 'shared/components/product-quantity/product-quantity.component';
 import { ProductComponent } from 'shared/components/product/product.component';
 import { AuthGuard } from 'shared/services/auth.guard.service';
@@ -31,7 +30,6 @@ import { UserBasketService } from 'shared/services/user-basket.service';
     UserBasketService,
     AuthService,
     AuthGuard,
-    UserService,
     CategoryService,
     AngularFireModule,
     AngularFireDatabase,

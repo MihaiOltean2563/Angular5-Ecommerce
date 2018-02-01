@@ -13,15 +13,13 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database-deprecated';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AppRoutingModule } from 'app/app.routing.module';
-import { AdminAuthGuard } from 'app/auth/admin-auth-guard.service';
+import { AdminAuthGuard } from 'app/admin/services/admin-auth-guard.service';
 import { ProductModalDirective } from 'app/shared/directives/product-modal.directive';
 import { CustomFormsModule } from 'ng2-validation';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { environment } from './../environments/environment';
-import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
-import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
-import { ProductFormComponent } from './admin/product-form/product-form.component';
+
 import { AppComponent } from './app.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { HeaderComponent } from './header/header.component';
@@ -38,6 +36,7 @@ import { ShoppingCartSummaryComponent } from './user-basket/shopping-cart-summar
 import { UserBasketEditComponent } from './user-basket/user-basket-edit/user-basket-edit.component';
 import { UserBasketComponent } from './user-basket/user-basket.component';
 import { SharedModule } from 'shared/shared.module';
+import { AdminModule } from 'app/admin/admin.module';
 
 
 @NgModule({
@@ -54,10 +53,7 @@ import { SharedModule } from 'shared/shared.module';
     CheckoutComponent,
     OrderSuccessComponent,
     MyOrdersComponent,
-    AdminProductsComponent,
-    AdminOrdersComponent,
     LoginComponent,
-    ProductFormComponent,
     ProductFilterComponent,
     ShoppingCartSummaryComponent,
     ShippingFormComponent
@@ -66,6 +62,7 @@ import { SharedModule } from 'shared/shared.module';
     DataTableModule,
     BrowserModule,
     SharedModule,
+    AdminModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
