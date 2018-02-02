@@ -7,7 +7,8 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { Subscriber } from 'rxjs/Subscriber';
 import { Product } from 'shared/models/product';
-import { DataTableResource } from 'angular-4-data-table-bootstrap-4';
+import { DataTableResource } from 'angular5-data-table';
+import { DataTableModule } from 'angular5-data-table';
 
 @Component({
   selector: 'app-admin-products',
@@ -36,7 +37,9 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
      //Initialize the data table
      this.tableResource = new DataTableResource(products);
      this.tableResource.query({offset: 0})
-       .then(items => this.items = items);
+       .then(items => {
+         this.items = items;
+        });
      this.tableResource.count()
        .then(count => this.itemCount = count);
   }

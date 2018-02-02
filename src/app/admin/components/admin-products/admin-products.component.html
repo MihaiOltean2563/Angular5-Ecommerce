@@ -2,14 +2,19 @@
     <a routerLink="/admin/products/new" class="btn btn-primary">New product</a>
 </p>
 
- <p>
+<p>
     <input
     #query 
     (keyup)="filter(query.value)"
     type="text" class="form-control" placeholder="Search">
-</p> 
+</p>  
 
-<data-table
+
+
+
+
+
+<data-table 
 [items]="items"
 [itemCount]="itemCount"
 (reload)="reloadItems($event)">
@@ -27,16 +32,18 @@
 [sortable]="true"
 [resizable]="true"
 >
-    <ng-template #dataTableCell let-item="item">
-        {{item.price | currency: 'USD'}}
-    </ng-template>
+<ng-template #dataTableCell let-item="item">
+    {{item.price | currency: 'USD'}}
+</ng-template>
 </data-table-column>
 
 <data-table-column
 [property]="'item.title'">
-    <ng-template #dataTableCell let-item="item">
-        <a [routerLink]="['/admin/products/', item.title]">Edit</a>
-    </ng-template>
+<ng-template #dataTableCell let-item="item">
+    <a [routerLink]="['/admin/products/', item.title]">Edit</a>
+</ng-template>
 </data-table-column>
 
-</data-table>
+</data-table> -->
+
+
