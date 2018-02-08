@@ -1,10 +1,13 @@
 
-  <div *ngIf="product.title" class="card ">
-    <img class="card-img-top" 
-    [src]="product.imageUrl" 
-    alt="{{product.title}}" 
-    style="max-width:100%"
-    *ngIf="product.imageUrl">
+  <div *ngIf="product.title" class="card">
+
+    <div class="card-img-container">
+        <img class="card-img-top" 
+        [src]="product.imageUrl" 
+        alt="{{product.title}}" 
+        *ngIf="product.imageUrl">
+    </div>
+    
 
     <div class="card-body text-center">
       <h5 class="card-title">{{product.title}}</h5>
@@ -34,6 +37,7 @@
        </div>
     </div>
   </div>
+
 
    <!-- Modal Template-->
    <ng-template #template>
