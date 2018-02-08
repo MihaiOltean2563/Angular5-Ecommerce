@@ -43,4 +43,6 @@ a.btn-warning{
     min-height: 100%;
     min-width: 100%;
     transform: translate(-50%, -50%);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
