@@ -1,0 +1,20 @@
+<hr>
+<p>
+  carousel works!
+</p>
+
+<div class="carousel-wrapper">
+
+  <div class="carousel-item" 
+  *ngFor="let item of slides" 
+  [class.active]="item === activeSlide">
+  <p>{{item.title}}</p>
+  <img src="{{item.imageUrl}}" alt="">
+  </div>
+
+  <button  class="prev" (click)="prev()">&lt;</button> 
+  <button class="next" (click)="next()">&gt;</button>
+</div>
+
+
+

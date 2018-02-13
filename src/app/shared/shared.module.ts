@@ -20,6 +20,10 @@ import { OrderService } from 'shared/services/order.service';
 import { ProductService } from 'shared/services/products.service';
 import { UserBasketService } from 'shared/services/user-basket.service';
 import { DataTableModule } from 'angular5-data-table';
+import { CarouselComponent, CarouselItemElement } from './components/carousel/carousel.component';
+import { CarouselControlsDirective } from './directives/carousel-controls.directive';
+import { CarouselItemDirective } from './directives/carousel-item.directive';
+
 
 
 @NgModule({
@@ -38,7 +42,11 @@ import { DataTableModule } from 'angular5-data-table';
   declarations: [
     ProductComponent, 
     ProductQuantityComponent,
-    ProductModalDirective
+    ProductModalDirective,
+    CarouselComponent,
+    CarouselControlsDirective,
+    CarouselItemDirective,
+    CarouselItemElement
   ],
   exports: [
     ProductComponent, 
@@ -52,7 +60,8 @@ import { DataTableModule } from 'angular5-data-table';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     ProductModalDirective,
-    DataTableModule
+    DataTableModule,
+    CarouselComponent
   ],
   providers: [ 
     ProductService, 
